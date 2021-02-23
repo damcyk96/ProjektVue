@@ -71,14 +71,16 @@ export default {
 
       this.isLoading = true;
 
+      const actionPayload = {
+        email: this.email,
+        password: this.password
+      };
+
       try {
         if (this.mode === 'login') {
-          // ...
+          await this.$store.dispatch('login', actionPayload);
         } else {
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password
-          });
+          await this.$store.dispatch('signup', actionPayload);
         }
       } catch (err) {
         this.error = err.message || 'Failed to authenticate, try later.';
@@ -101,58 +103,34 @@ export default {
 </script>
 
 <style scoped>
+form {
+  margin: 1rem;
+  padding: 1rem;
+}
+
 .form-control {
   margin: 0.5rem 0;
 }
 
 label {
   font-weight: bold;
-  display: block;
   margin-bottom: 0.5rem;
-}
-
-input[type='checkbox'] + label {
-  font-weight: normal;
-  display: inline;
-  margin: 0 0 0 0.5rem;
+  display: block;
 }
 
 input,
 textarea {
   display: block;
   width: 100%;
-  border: 1px solid #ccc;
   font: inherit;
+  border: 1px solid #ccc;
+  padding: 0.15rem;
 }
 
 input:focus,
 textarea:focus {
-  background-color: #f0e6fd;
-  outline: none;
   border-color: #1d6ead;
-}
-
-input[type='checkbox'] {
-  display: inline;
-  width: auto;
-  border: none;
-}
-
-input[type='checkbox']:focus {
-  outline: #1d6ead solid 1px;
-}
-
-h3 {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-}
-
-.invalid label {
-  color: red;
-}
-
-.invalid input,
-.invalid textarea {
-  border: 1px solid red;
+  background-color: #faf6ff;
+  outline: none;
 }
 </style>
