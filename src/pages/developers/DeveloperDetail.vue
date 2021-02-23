@@ -9,8 +9,8 @@
     <section>
       <base-card>
         <header>
-          <h2>Interested? Reach out now!</h2>
-          <base-button link :to="feedbackLink">Feedback</base-button>
+          <h2>Add feedback for {{ fullName }}</h2>
+          <base-button link :to="feedbackLink">Feedbacks</base-button>
         </header>
         <router-view></router-view>
       </base-card>

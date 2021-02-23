@@ -6,6 +6,7 @@ import DeveloperRegistration from './pages/developers/DeveloperRegistration.vue'
 import FeedbackDeveloper from './pages/feedbacks/FeedbackDeveloper.vue';
 import FeedbacksReceived from './pages/feedbacks/FeedbacksReceived.vue';
 import NotFound from './pages/NotFound.vue';
+import UserAuth from './pages/auth/UserAuth.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,6 +23,7 @@ const router = createRouter({
     },
     { path: '/register', component: DeveloperRegistration },
     { path: '/feedbacks', component: FeedbacksReceived },
+    { path: '/auth', component: UserAuth },
     { path: '/:notFound(.*)', component: NotFound }
   ]
 });

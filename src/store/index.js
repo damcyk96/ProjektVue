@@ -2,21 +2,13 @@ import { createStore } from 'vuex';
 
 import developersModule from './modules/developers/index.js';
 import feedbackModule from './modules/feedbacks/index';
+import authModule from './modules/auth/index';
 
 const store = createStore({
   modules: {
     developers: developersModule,
-    feedback: feedbackModule
-  },
-  state() {
-    return {
-      userId: 'c6'
-    };
-  },
-  getters: {
-    userId(state) {
-      return state.userId;
-    }
+    feedback: feedbackModule,
+    auth: authModule
   }
 });
 
