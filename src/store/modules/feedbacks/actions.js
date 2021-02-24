@@ -28,8 +28,9 @@ export default {
   },
   async fetchFeedbacks(context) {
     const developerId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://vue-http-demo-85e9e.firebaseio.com/feedbacks/${developerId}.json`
+      `https://vue-http-demo-85e9e.firebaseio.com/feedbacks/${developerId}.json?auth=${token}`
     );
     const responseData = await response.json();
 

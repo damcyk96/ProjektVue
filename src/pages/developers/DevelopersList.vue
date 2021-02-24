@@ -13,6 +13,7 @@
           <base-button mode="outline" @click="loadDevelopers(true)"
             >Refresh</base-button
           >
+          <!-- <base-button v-if="isLoggedIn && !isDeveloper && !isLoading" link to="/register"> -->
           <base-button v-if="!isDeveloper && !isLoading" link to="/register"
             >Register as Dev</base-button
           >
@@ -60,6 +61,9 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     isDeveloper() {
       return this.$store.getters['developers/isDeveloper'];
     },

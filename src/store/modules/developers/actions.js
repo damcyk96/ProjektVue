@@ -9,8 +9,10 @@ export default {
       areas: data.areas
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/developers/${userId}.json`,
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/developers/${userId}.json?auth=${token}`,
       {
         method: 'PUT',
         body: JSON.stringify(developerData)

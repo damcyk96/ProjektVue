@@ -8,13 +8,28 @@
         <li>
           <router-link to="/developers">All Devs</router-link>
         </li>
+        <!-- <li v-if="isLoggedIn"> -->
         <li>
           <router-link to="/feedbacks">Feedbacks</router-link>
+        </li>
+        <!-- <li v-else> -->
+        <li>
+          <router-link to="/auth">Login</router-link>
         </li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getter.isAuthenticated;
+    }
+  }
+};
+</script>
 
 <style scoped>
 header {
