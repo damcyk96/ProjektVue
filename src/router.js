@@ -25,22 +25,27 @@ const router = createRouter({
     {
       path: '/register',
       component: DeveloperRegistration,
-      meta: { requirestAuth: true }
+      meta: { requiresAuth: true }
     },
     {
       path: '/feedbacks',
       component: FeedbacksReceived,
-      meta: { requirestAuth: true }
+      meta: { requiresAuth: true }
     },
-    { path: '/auth', component: UserAuth, meta: { requirestUnauth: true } },
+    {
+      path: '/feedbacks',
+      component: FeedbacksReceived,
+      meta: { requiresAuth: true }
+    },
+    { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
     { path: '/:notFound(.*)', component: NotFound }
   ]
 });
 
 router.beforeEach(function(to, _, next) {
-  if (to.meta.requirestAuth && store.getters.isAuthenticated) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
     next('/auth');
-  } else if (to.meta.requirestUnauth && store.getters.isAuthenticated) {
+  } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
     next('/developers');
   } else {
     next();

@@ -44,7 +44,7 @@ export default {
     receivedFeedbacks() {
       return this.$store.getters['feedbacks/feedbacks'];
     },
-    hasFeebacks() {
+    hasFeedbacks() {
       return this.$store.getters['feedbacks/hasFeedbacks'];
     }
   },
