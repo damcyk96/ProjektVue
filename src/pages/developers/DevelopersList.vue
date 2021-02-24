@@ -14,6 +14,9 @@
             >Refresh</base-button
           >
           <!-- <base-button v-if="isLoggedIn && !isDeveloper && !isLoading" link to="/register"> -->
+          <base-button v-if="!isLoggedIn" link to="/auth?redirect=register"
+            >Login to add your data</base-button
+          >
           <base-button v-if="!isDeveloper && !isLoading" link to="/register"
             >Register as Dev</base-button
           >

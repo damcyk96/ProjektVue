@@ -16,6 +16,9 @@
         <li>
           <router-link to="/auth">Login</router-link>
         </li>
+        <li>
+          <router-link v-if="isLoggedIn" @click="logout">Logout</router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -26,6 +29,12 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getter.isAuthenticated;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.replace('/developers');
     }
   }
 };
