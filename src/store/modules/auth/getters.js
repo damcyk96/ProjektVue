@@ -6,6 +6,6 @@ export default {
     return state.token;
   },
   isAuthenticated(state) {
-    return state.isAuthenticated;
+    return !!state.token;
   }
 };

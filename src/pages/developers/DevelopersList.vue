@@ -13,11 +13,13 @@
           <base-button mode="outline" @click="loadDevelopers(true)"
             >Refresh</base-button
           >
-          <!-- <base-button v-if="isLoggedIn && !isDeveloper && !isLoading" link to="/register"> -->
-          <base-button v-if="!isLoggedIn" link to="/auth?redirect=register"
+          <base-button link to="/auth?redirect=register" v-if="!isLoggedIn"
             >Login to add your data</base-button
           >
-          <base-button v-if="!isDeveloper && !isLoading" link to="/register"
+          <base-button
+            v-if="isLoggedIn && !isDeveloper && !isLoading"
+            link
+            to="/register"
             >Register as Dev</base-button
           >
         </div>
@@ -26,7 +28,7 @@
         </div>
         <ul v-else-if="hasDevelopers">
           <developer-item
-            v-for="developer in filteredDeveloper"
+            v-for="developer in filteredDevelopers"
             :key="developer.id"
             :id="developer.id"
             :first-name="developer.firstName"
@@ -70,7 +72,7 @@ export default {
     isDeveloper() {
       return this.$store.getters['developers/isDeveloper'];
     },
-    filteredDeveloper() {
+    filteredDevelopers() {
       const developers = this.$store.getters['developers/developers'];
       return developers.filter(developer => {
         if (this.activeFilters.react && developer.areas.includes('react')) {
@@ -96,27 +98,26 @@ export default {
     }
   },
   created() {
-    //TO DO: FIX IT
-    //this.loadDevelopers();
+    this.loadDevelopers();
   },
   methods: {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
+    },
+    async loadDevelopers(refresh = false) {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('developers/loadDevelopers', {
+          forceRefresh: refresh
+        });
+      } catch (error) {
+        this.error = error.message || 'Something went wrong!';
+      }
+      this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     }
-  },
-  async loadDevelopers(refresh = false) {
-    this.isLoading = true;
-    try {
-      await this.$store.dispatch('developers/loadDevelopers', {
-        forceRefresh: refresh
-      });
-    } catch (error) {
-      this.error = error.message || 'Something went wrong!';
-    }
-    this.isLoading = false;
-  },
-  handleError() {
-    this.error = null;
   }
 };
 </script>

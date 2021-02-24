@@ -1,7 +1,6 @@
 export default {
   async feedbackDeveloper(context, payload) {
     const newFeedback = {
-      developerId: payload.developerId,
       userEmail: payload.email,
       message: payload.message
     };
@@ -12,6 +11,7 @@ export default {
         body: JSON.stringify(newFeedback)
       }
     );
+
     const responseData = await response.json();
 
     if (!response.ok) {
