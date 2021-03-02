@@ -17,19 +17,15 @@ const router = createRouter({
     {
       path: '/developers/:id',
       component: DeveloperDetail,
+      name: 'developer',
       props: true,
       children: [
-        { path: 'feedback', component: FeedbackDeveloper } // /developers/c1/feedback
+        { path: 'feedback', name: 'feedbackDev', component: FeedbackDeveloper } // /developers/c1/feedback
       ]
     },
     {
       path: '/register',
       component: DeveloperRegistration,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/feedbacks',
-      component: FeedbacksReceived,
       meta: { requiresAuth: true }
     },
     {

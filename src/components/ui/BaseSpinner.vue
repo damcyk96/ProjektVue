@@ -1,14 +1,7 @@
 <template>
   <div class="spinner">
     <div class="lds-roller">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div v-for="i in 7" :key="i"></div>
     </div>
   </div>
 </template>

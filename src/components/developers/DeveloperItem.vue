@@ -11,10 +11,15 @@
       ></base-badge>
     </div>
     <div class="actions">
-      <base-button mode="outline" link :to="developerFeedbackLink"
+      <base-button
+        mode="outline"
+        link
+        :to="{ name: 'feedbackDev', params: { id: id } }"
         >Feedback</base-button
       >
-      <base-button link :to="developerDetailsLink">View Details</base-button>
+      <base-button link :to="{ name: 'developer', params: { id: id } }"
+        >View Details</base-button
+      >
     </div>
   </li>
 </template>
@@ -25,12 +30,6 @@ export default {
   computed: {
     fullName() {
       return this.firstName + ' ' + this.lastName;
-    },
-    developerFeedbackLink() {
-      return this.$route.path + '/' + this.id + '/feedback'; // /developers/c1/feedback
-    },
-    developerDetailsLink() {
-      return this.$route.path + '/' + this.id; // /developers/c1
     }
   }
 };
