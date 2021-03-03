@@ -1,25 +1,9 @@
 <template>
   <base-card>
     <h2>Find Devs</h2>
-    <span class="filter-option">
-      <input type="checkbox" id="react" checked @change="setFilter" />
-      <label for="react">React</label>
-    </span>
-    <span class="filter-option">
-      <input type="checkbox" id="csharp" checked @change="setFilter" />
-      <label for="csharp">C#</label>
-    </span>
-    <span class="filter-option">
-      <input type="checkbox" id="java" checked @change="setFilter" />
-      <label for="java">Java</label>
-    </span>
-    <span class="filter-option">
-      <input type="checkbox" id="python" checked @change="setFilter" />
-      <label for="python">Python</label>
-    </span>
-    <span class="filter-option">
-      <input type="checkbox" id="tester" checked @change="setFilter" />
-      <label for="tester">Tester</label>
+    <span class="filter-option" v-for="(key, value) in filters" :key="key">
+      <input type="checkbox" :id="filter" checked @change="setFilter" />
+      <label :for="filter">{{ value }}</label>
     </span>
   </base-card>
 </template>

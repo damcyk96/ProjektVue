@@ -1,97 +1,15 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control" :class="{ invalid: !firstName.isValid }">
-      <label for="firstname">Firstname</label>
-      <input
-        type="text"
-        id="firstname"
-        v-model.trim="firstName.val"
-        @blur="clearValidity('firstName')"
-      />
-      <p v-if="!firstName.isValid">Firstname must not be empty.</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !lastName.isValid }">
-      <label for="lastname">Lastname</label>
-      <input
-        type="text"
-        id="lastname"
-        v-model.trim="lastName.val"
-        @blur="clearValidity('lastName')"
-      />
-      <p v-if="!lastName.isValid">Lastname must not be empty.</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !description.isValid }">
-      <label for="description">Description</label>
-      <textarea
-        id="description"
-        rows="5"
-        v-model.trim="description.val"
-        @blur="clearValidity('description')"
-      ></textarea>
-      <p v-if="!description.isValid">Description must not be empty.</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !rate.isValid }">
-      <label for="rate">Hourly Rate</label>
-      <input
-        type="number"
-        id="rate"
-        v-model.number="rate.val"
-        @blur="clearValidity('rate')"
-      />
-      <p v-if="!rate.isValid">Rate must be greater than 0.</p>
-    </div>
+    <developer-form-input name="firstName"> </developer-form-input>
+    <developer-form-input name="lastName"> </developer-form-input>
+    <developer-form-input name="description" textarea="true" rows="5">
+    </developer-form-input>
+    <developer-form-input name="rate" type="number"> </developer-form-input>
+
     <div class="form-control" :class="{ invalid: !areas.isValid }">
       <h3>Areas of Expertise</h3>
-      <div>
-        <input
-          type="checkbox"
-          id="react"
-          value="react"
-          v-model="areas.val"
-          @blur="clearValidity('areas')"
-        />
-        <label for="react">React Developer</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="csharp"
-          value="csharp"
-          v-model="areas.val"
-          @blur="clearValidity('areas')"
-        />
-        <label for="csharp">C# Developer</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="java"
-          value="java"
-          v-model="areas.val"
-          @blur="clearValidity('areas')"
-        />
-        <label for="java">Java Developer</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="python"
-          value="python"
-          v-model="areas.val"
-          @blur="clearValidity('areas')"
-        />
-        <label for="python">Python Developer</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="tester"
-          value="tester"
-          v-model="areas.val"
-          @blur="clearValidity('areas')"
-        />
-        <label for="tester">Tester</label>
-      </div>
+      <!-- area  v-for i v-model-->
+      <developer-form-areas expertise="react"> </developer-form-areas>
       <p v-if="!areas.isValid">At least one expertise must be selected.</p>
     </div>
     <p v-if="!formIsValid">Please fix the above errors and submit again.</p>
@@ -100,7 +18,10 @@
 </template>
 
 <script>
+import DeveloperFormAreas from './developerform/DeveloperFormAreas';
+import DeveloperFormInput from './developerform/DeveloperFormInput';
 export default {
+  components: { DeveloperFormAreas, DeveloperFormInput },
   emits: ['save-data'],
   data() {
     return {
@@ -121,7 +42,7 @@ export default {
         isValid: true
       },
       areas: {
-        val: [],
+        val: ['react', 'csharp', 'java', 'python', 'tester'],
         isValid: true
       },
       formIsValid: true
