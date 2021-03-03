@@ -74,24 +74,11 @@ export default {
     },
     filteredDevelopers() {
       const developers = this.$store.getters['developers/developers'];
-      return developers.filter(developer => {
-        if (this.activeFilters.react && developer.areas.includes('react')) {
-          return true;
-        }
-        if (this.activeFilters.csharp && developer.areas.includes('csharp')) {
-          return true;
-        }
-        if (this.activeFilters.java && developer.areas.includes('java')) {
-          return true;
-        }
-        if (this.activeFilters.python && developer.areas.includes('python')) {
-          return true;
-        }
-        if (this.activeFilters.tester && developer.areas.includes('tester')) {
-          return true;
-        }
-        return false;
-      });
+      return developers.filter(developer =>
+        Object.keys(this.activeFilters).some(
+          name => this.activeFilters[name] && developer.areas.includes(name)
+        )
+      );
     },
     hasDevelopers() {
       return !this.isLoading && this.$store.getters['developers/hasDevelopers'];
