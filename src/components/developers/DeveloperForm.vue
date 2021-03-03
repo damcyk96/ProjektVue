@@ -8,8 +8,8 @@
 
     <div class="form-control" :class="{ invalid: !areas.isValid }">
       <h3>Areas of Expertise</h3>
-      <!-- area  v-for i v-model-->
-      <developer-form-areas expertise="react"> </developer-form-areas>
+      <!-- jak to tutaj ogarnąć \/ -->
+      <developer-form-area v-for="area in areas.val"> </developer-form-area>
       <p v-if="!areas.isValid">At least one expertise must be selected.</p>
     </div>
     <p v-if="!formIsValid">Please fix the above errors and submit again.</p>
@@ -18,10 +18,11 @@
 </template>
 
 <script>
-import DeveloperFormAreas from './developerform/DeveloperFormAreas';
-import DeveloperFormInput from './developerform/DeveloperFormInput';
+import DeveloperFormArea from './developerform/DeveloperFormArea.vue';
+import DeveloperFormInput from './developerform/DeveloperFormInput.vue';
+import { arrayOfSpecialisationName } from '../../store/specialisation.js';
 export default {
-  components: { DeveloperFormAreas, DeveloperFormInput },
+  components: { DeveloperFormArea, DeveloperFormInput },
   emits: ['save-data'],
   data() {
     return {
@@ -42,7 +43,7 @@ export default {
         isValid: true
       },
       areas: {
-        val: ['react', 'csharp', 'java', 'python', 'tester'],
+        val: arrayOfSpecialisationName,
         isValid: true
       },
       formIsValid: true

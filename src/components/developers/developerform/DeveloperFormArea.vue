@@ -1,19 +1,17 @@
 <template>
-  <!-- jak przejsc po calej tablicy z data, chociaz tutaj powinienem te react,csharp itd miec w jednym miejscu i wtedy v-model -->
   <div>
     <input
       type="checkbox"
-      :id="areas.val"
-      :value="areas.val"
-      v-model="areas.val"
+      :id="expertise"
+      :value="expertise"
+      v-model="expertise"
       @blur="clearValidity('areas')"
     />
-    <label :for="areas.val">{{ areas.val }} Developer</label>
+    <label :for="expertise">{{ expertise }} Developer</label>
   </div>
 </template>
 
 <script>
-import areas from '../../../store/index';
 export default {
   props: {
     expertise: {

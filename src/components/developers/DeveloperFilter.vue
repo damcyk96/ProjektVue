@@ -9,18 +9,11 @@
 </template>
 
 <script>
+import { filters } from '../../store/specialisation.js';
 export default {
   emits: ['change-filter'],
   data() {
-    return {
-      filters: {
-        react: true,
-        csharp: true,
-        java: true,
-        python: true,
-        tester: true
-      }
-    };
+    return filters;
   },
   methods: {
     setFilter(event) {
