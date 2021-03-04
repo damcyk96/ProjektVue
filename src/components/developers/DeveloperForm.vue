@@ -8,8 +8,12 @@
 
     <div class="form-control" :class="{ invalid: !areas.isValid }">
       <h3>Areas of Expertise</h3>
-      <!-- jak to tutaj ogarnąć \/ -->
-      <developer-form-area v-for="area in areas.val"> </developer-form-area>
+      <developer-form-area
+        v-for="area in areas.val"
+        :key="area"
+        :expertise="area"
+      >
+      </developer-form-area>
       <p v-if="!areas.isValid">At least one expertise must be selected.</p>
     </div>
     <p v-if="!formIsValid">Please fix the above errors and submit again.</p>
