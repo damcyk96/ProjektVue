@@ -9,7 +9,7 @@
       @blur="clearValidity(name)"
     />
     <textarea
-      v-esle
+      v-else
       :id="name"
       :rows="rows"
       v-model.trim="description.val"

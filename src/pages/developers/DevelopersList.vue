@@ -55,14 +55,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      error: null,
-      activeFilters: {
-        react: true,
-        csharp: true,
-        java: true,
-        python: true,
-        tester: true
-      }
+      error: null
+      //nie tykać filtrów - computed filters
     };
   },
   computed: {

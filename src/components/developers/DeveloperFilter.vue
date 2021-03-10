@@ -1,25 +1,35 @@
 <template>
   <base-card>
     <h2>Find Devs</h2>
-    <span class="filter-option" v-for="(key, value) in filters" :key="key">
-      <input type="checkbox" :id="filter" checked @change="setFilter" />
+    <span
+      data-testid="dev__filter"
+      class="filter-option"
+      v-for="(key, value) in filters"
+      :key="key"
+    >
+      <input
+        type="checkbox"
+        :id="filter"
+        checked
+        @change="setFilter(key, $event)"
+      />
       <label :for="filter">{{ value }}</label>
     </span>
   </base-card>
 </template>
 
 <script>
-import { filters } from '../../store/specialisation.js';
 export default {
   emits: ['change-filter'],
-  data() {
-    return filters;
-  },
   methods: {
-    setFilter(event) {
-      const inputId = event.target.id;
+    setFilter(key, event) {
       const isActive = event.target.checked;
-      this.filter[inputId] = isActive;
+    }
+  },
+
+  computed: {
+    filters() {
+      return this.$store.state.filters.filters;
     }
   }
 };
