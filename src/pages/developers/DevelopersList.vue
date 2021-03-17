@@ -56,7 +56,6 @@ export default {
     return {
       isLoading: false,
       error: null
-      //nie tykać filtrów - computed filters
     };
   },
   computed: {
@@ -76,6 +75,9 @@ export default {
     },
     hasDevelopers() {
       return !this.isLoading && this.$store.getters['developers/hasDevelopers'];
+    },
+    activeFilters() {
+      return this.$store.state.filters;
     }
   },
   created() {

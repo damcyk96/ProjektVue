@@ -1,6 +1,6 @@
 <template>
   <base-card>
-    <h2>Find Devs</h2>
+    <h2 data-testid="dev__filter-h2">Find Devs</h2>
     <span
       data-testid="dev__filter"
       class="filter-option"
@@ -22,11 +22,10 @@
 export default {
   emits: ['change-filter'],
   methods: {
-    setFilter(key, event) {
-      const isActive = event.target.checked;
+    setFilter() {
+      this.$store.dispatch('filters/setFilter');
     }
   },
-
   computed: {
     filters() {
       return this.$store.state.filters.filters;

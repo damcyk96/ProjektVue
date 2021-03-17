@@ -24,7 +24,6 @@
 <script>
 import DeveloperFormArea from './developerform/DeveloperFormArea.vue';
 import DeveloperFormInput from './developerform/DeveloperFormInput.vue';
-import { arrayOfSpecialisationName } from '../../store/specialisation.js';
 export default {
   components: { DeveloperFormArea, DeveloperFormInput },
   emits: ['save-data'],
@@ -47,7 +46,7 @@ export default {
         isValid: true
       },
       areas: {
-        val: arrayOfSpecialisationName,
+        val: null,
         isValid: true
       },
       formIsValid: true
