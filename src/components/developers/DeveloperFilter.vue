@@ -4,16 +4,16 @@
     <span
       data-testid="dev__filter"
       class="filter-option"
-      v-for="(key, value) in filters"
+      v-for="(value, key) in filters"
       :key="key"
     >
       <input
         type="checkbox"
-        :id="filter"
-        checked
+        :id="key"
+        :checked="value"
         @change="setFilter(key, $event)"
       />
-      <label :for="filter">{{ value }}</label>
+      <label :for="key">{{ key }}</label>
     </span>
   </base-card>
 </template>
@@ -22,12 +22,12 @@
 export default {
   emits: ['change-filter'],
   methods: {
-    setFilter() {
+    setFilter(key, event) {
       const filterPayload = {
-        key: this.key,
-        value: this.value
+        value: event.target.checked,
+        key
       };
-      this.$store.dispatch('setFilter', filterPayload);
+      this.$store.dispatch('filters/setFilter', filterPayload);
     }
   },
   computed: {
