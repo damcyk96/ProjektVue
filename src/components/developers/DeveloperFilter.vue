@@ -23,7 +23,11 @@ export default {
   emits: ['change-filter'],
   methods: {
     setFilter() {
-      this.$store.dispatch('filters/setFilter');
+      const filterPayload = {
+        key: this.key,
+        value: this.value
+      };
+      this.$store.dispatch('setFilter', filterPayload);
     }
   },
   computed: {
