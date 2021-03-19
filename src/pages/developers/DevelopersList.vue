@@ -67,9 +67,10 @@ export default {
     },
     filteredDevelopers() {
       const developers = this.$store.getters['developers/developers'];
+      const newFilters = this.activeFilters.filters;
       return developers.filter(developer =>
-        Object.keys(this.activeFilters).some(
-          name => this.activeFilters[name] && developer.areas.includes(name)
+        Object.keys(newFilters).some(
+          name => newFilters[name] && developer.areas.includes(name)
         )
       );
     },

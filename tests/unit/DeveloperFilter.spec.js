@@ -1,21 +1,19 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { expect } from 'chai';
-import Vuex from 'vuex';
 import store from '../../src/store/index';
 import { DeveloperFilter } from '../../src/components/developers/DeveloperFilter.vue';
+
+const App = {
+  template: DeveloperFilter
+};
 
 describe('DeveloperFilter', () => {
   let wrapper;
 
-  const localVue = createLocalVue();
-  localVue.use(Vuex);
-
-  beforeEach(() => {
-    wrapper = shallowMount(DeveloperFilter, { store, localVue });
-  });
+  wrapper = mount(App);
 
   it('should render correctly', () => {
-    expect(wrapper.exists()).to.be.true;
+    expect(wrapper.exists()).toBe(true);
   });
 
   // it('should change the state on false if unchecked all checkboxes', () => {});
