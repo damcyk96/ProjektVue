@@ -40,6 +40,8 @@ const router = createRouter({
 
 router.beforeEach(function(to, _, next) {
   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    const result = store.getters.isAuthenticated;
+    console.log(result);
     next('/auth');
   } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
     next('/developers');

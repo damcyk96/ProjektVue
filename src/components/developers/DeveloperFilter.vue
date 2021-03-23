@@ -2,18 +2,19 @@
   <base-card>
     <h2 data-testid="dev__filter-h2">Find Devs</h2>
     <span
-      data-testid="dev__filter"
+      :data-testid="`filter-span-${key}`"
       class="filter-option"
       v-for="(value, key) in filters"
       :key="key"
     >
       <input
+        :data-testid="`filter-input-${key}`"
         type="checkbox"
         :id="key"
         :checked="value"
         @change="setFilter(key, $event)"
       />
-      <label :for="key">{{ key }}</label>
+      <label :data-testid="`filter-label-${key}`" :for="key">{{ key }}</label>
     </span>
   </base-card>
 </template>

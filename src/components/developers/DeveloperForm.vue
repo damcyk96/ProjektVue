@@ -6,7 +6,7 @@
     </developer-form-input>
     <developer-form-input name="rate" type="number"> </developer-form-input>
 
-    <div class="form-control" :class="{ invalid: !areas.isValid }">
+    <div class="form-control" :class="{ invalid: !isFormValid }">
       <h3>Areas of Expertise</h3>
       <developer-form-area
         v-for="area in areas.val"
@@ -29,53 +29,59 @@ export default {
   emits: ['save-data'],
   data() {
     return {
-      firstName: {
-        val: '',
-        isValid: true
-      },
-      lastName: {
-        val: '',
-        isValid: true
-      },
-      description: {
-        val: '',
-        isValid: true
-      },
-      rate: {
-        val: null,
-        isValid: true
-      },
-      areas: {
-        val: null,
-        isValid: true
-      },
-      formIsValid: true
+      inputs: {
+        firstName: {
+          val: '',
+          isValid: true
+        },
+        lastName: {
+          val: '',
+          isValid: true
+        },
+        description: {
+          val: '',
+          isValid: true
+        },
+        rate: {
+          val: null,
+          isValid: true
+        },
+        areas: {
+          val: null,
+          isValid: true
+        }
+      }
     };
+  },
+  computed: {
+    isFormValid() {
+      return Object.values(this.inputs).every(input => input.isValid);
+    }
   },
   methods: {
     clearValidity(input) {
-      this[input].isValid = true;
+      this.inputs[input].isValid = true;
     },
     validateForm() {
       this.formIsValid = true;
       if (this.firstName.val === '') {
-        this.firstName.isValid = false;
+        this.inputs.firstName.isValid = false;
         this.formIsValid = false;
       }
       if (this.lastName.val === '') {
-        this.lastName.isValid = false;
+        this.inputs.lastName.isValid = false;
         this.formIsValid = false;
       }
       if (this.description.val === '') {
-        this.description.isValid = false;
+        this.inputs.description.isValid = false;
         this.formIsValid = false;
       }
       if (!this.rate.val || this.rate.val < 0) {
-        this.rate.isValid = false;
+        this.inputs.rate.isValid = false;
         this.formIsValid = false;
       }
       if (this.areas.val.length === 0) {
-        this.areas.isValid = false;
+        this.inputs.areas.isValid = false;
         this.formIsValid = false;
       }
     },

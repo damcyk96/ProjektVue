@@ -13,12 +13,11 @@
           <base-button mode="outline" @click="loadDevelopers(true)"
             >Refresh</base-button
           >
-          <base-button link to="/auth?redirect=register" v-if="!isLoggedIn"
+          <base-button to="/auth?redirect=register" v-if="!isLoggedIn"
             >Login to add your data</base-button
           >
           <base-button
             v-if="isLoggedIn && !isDeveloper && !isLoading"
-            link
             to="/register"
             >Register as Dev</base-button
           >
@@ -37,7 +36,9 @@
             :areas="developer.areas"
           ></developer-item>
         </ul>
-        <h3 v-else>No developes found.</h3>
+        <h3 v-if="filteredDevelopers.length == 0 && !isloading">
+          No developes found.
+        </h3>
       </base-card>
     </section>
   </div>

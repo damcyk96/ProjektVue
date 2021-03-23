@@ -13,11 +13,10 @@
     <div class="actions">
       <base-button
         mode="outline"
-        link
         :to="{ name: 'feedbackDev', params: { id: id } }"
         >Feedback</base-button
       >
-      <base-button link :to="{ name: 'developer', params: { id: id } }"
+      <base-button :to="{ name: 'developer', params: { id: id } }"
         >View Details</base-button
       >
     </div>
