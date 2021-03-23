@@ -55,6 +55,10 @@ export default {
   },
   computed: {
     isFormValid() {
+      const isFormValidConsole = Object.values(this.inputs).every(
+        input => input.isValid
+      );
+      console.log(isFormValidConsole);
       return Object.values(this.inputs).every(input => input.isValid);
     }
   },

@@ -1,28 +1,34 @@
 import { mount } from '@vue/test-utils';
 import { expect } from 'chai';
-import { createStore } from 'vuex';
-import { DeveloperFilter } from '../../src/components/developers/DeveloperFilter.vue';
 
-const store = createStore({
-  state: {
-    firstName: 'Alice',
-    lastName: 'Doe'
-  },
+const App = {
+  template: `<div>Hello</div>`
+};
 
-  getters: {
-    fullname: state => state.firstName + ' ' + state.lastName
-  }
+test('App', () => {
+  const wrapper = mount(App);
+  console.log(wrapper.html());
+  expect(wrapper.html()).toBe('<div>Hello</div>');
 });
 
-it('renders a username using a real Vuex getter', () => {
-  const wrapper = mount(DeveloperFilter, {
-    global: {
-      plugins: [store]
-    }
-  });
+// import { mount } from '@vue/test-utils';
+// import { expect } from 'chai';
+// import { DeveloperFilter } from '../../src/components/developers/DeveloperFilter.vue';
 
-  expect(wrapper.exists(DeveloperFilter)).toBe(true);
-});
+// describe('DevFilters', () => {
+//   it('renders a filters using mock store', () => {
+//     const wrapper = mount(DeveloperFilter, {
+//       mocks: {
+//         $store: {
+//           state: { react: true }
+//         }
+//       }
+//     });
+//     expect(wrapper.find('[data-testid="dev__filter-h2"]').text()).to.contain(
+//       'Find Devs'
+//     );
+//   });
+// });
 
 // it('should change the state on false if unchecked all checkboxes', () => {});
 
