@@ -8,15 +8,11 @@
 
     <div class="form-control" :class="{ invalid: !isFormValid }">
       <h3>Areas of Expertise</h3>
-      <developer-form-area
-        v-for="area in areas.val"
-        :key="area"
-        :expertise="area"
-      >
+      <developer-form-area v-for="area in areas" :key="area" :areas="area">
       </developer-form-area>
-      <p v-if="!areas.isValid">At least one expertise must be selected.</p>
+      <p v-if="!isFormValid">At least one expertise must be selected.</p>
     </div>
-    <p v-if="!formIsValid">Please fix the above errors and submit again.</p>
+    <p v-if="!isFormValid">Please fix the above errors and submit again.</p>
     <base-button>Register</base-button>
   </form>
 </template>
@@ -55,10 +51,7 @@ export default {
   },
   computed: {
     isFormValid() {
-      const isFormValidConsole = Object.values(this.inputs).every(
-        input => input.isValid
-      );
-      console.log(isFormValidConsole);
+      console.log(Object.values(this.inputs).every(input => input.isValid));
       return Object.values(this.inputs).every(input => input.isValid);
     }
   },
@@ -67,24 +60,24 @@ export default {
       this.inputs[input].isValid = true;
     },
     validateForm() {
-      this.formIsValid = true;
+      this.inputs.formIsValid = true;
       if (this.firstName.val === '') {
         this.inputs.firstName.isValid = false;
         this.formIsValid = false;
       }
-      if (this.lastName.val === '') {
+      if (this.inputs.lastName.val === '') {
         this.inputs.lastName.isValid = false;
         this.formIsValid = false;
       }
-      if (this.description.val === '') {
+      if (this.inputs.description.val === '') {
         this.inputs.description.isValid = false;
         this.formIsValid = false;
       }
-      if (!this.rate.val || this.rate.val < 0) {
+      if (!this.inputs.rate.val || this.inputs.rate.val < 0) {
         this.inputs.rate.isValid = false;
         this.formIsValid = false;
       }
-      if (this.areas.val.length === 0) {
+      if (this.inputs.areas.val.length === 0) {
         this.inputs.areas.isValid = false;
         this.formIsValid = false;
       }
@@ -103,6 +96,7 @@ export default {
         rate: this.rate.val,
         areas: this.areas.val
       };
+      console.log(formData);
 
       this.$emit('save-data', formData);
     }

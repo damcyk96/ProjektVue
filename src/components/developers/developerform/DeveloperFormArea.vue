@@ -2,19 +2,19 @@
   <div>
     <input
       type="checkbox"
-      :id="expertise"
-      :value="expertise"
-      v-model="expertise"
+      :id="areas"
+      :value="areas"
+      v-model="areas"
       @blur="clearValidity('areas')"
     />
-    <label :for="expertise">{{ expertise }} Developer</label>
+    <label :for="areas">{{ areas }} Developer</label>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    expertise: {
+    areas: {
       type: String,
       required: true,
       default: null

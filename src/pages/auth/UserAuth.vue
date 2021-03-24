@@ -43,7 +43,6 @@ export default {
   },
   computed: {
     submitButtonCaption() {
-      console.log(this.mode);
       if (this.mode === 'login') {
         return 'Login';
       } else {
@@ -83,7 +82,6 @@ export default {
           await this.$store.dispatch('signup', actionPayload);
         }
         const redirectUrl = '/' + (this.$route.query.redirect || 'developers');
-        console.log(redirectUrl);
         this.$router.replace(redirectUrl);
       } catch (err) {
         this.error = err.message || 'Failed to authenticate, try later.';

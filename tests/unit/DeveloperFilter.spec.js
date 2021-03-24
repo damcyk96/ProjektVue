@@ -1,30 +1,44 @@
-import { mount } from '@vue/test-utils';
+// import { shallowMount } from '@vue/test-utils';
+// import { createStore } from 'vuex';
+// import { expect } from 'chai';
+// import DeveloperFilter from '../../src/components/developers/DeveloperFilter.vue';
+
 import { expect } from 'chai';
+import { mount } from '@vue/test-utils';
+import DeveloperFilter from '../../src/components/developers/DeveloperFilter.vue';
 
-const App = {
-  template: `<div>Hello</div>`
-};
+it('renders a filtering component', () => {
+  const wrapper = mount(DeveloperFilter, {
+    mocks: {
+      $store: {
+        state: { react: true }
+      }
+    }
+  });
 
-test('App', () => {
-  const wrapper = mount(App);
-  console.log(wrapper.html());
-  expect(wrapper.html()).toBe('<div>Hello</div>');
+  expect(wrapper.find('[data-testid="dev__filter-h2"]').text()).toBe(
+    'Find Devs'
+  );
 });
 
-// import { mount } from '@vue/test-utils';
-// import { expect } from 'chai';
-// import { DeveloperFilter } from '../../src/components/developers/DeveloperFilter.vue';
+// const store = createStore({
+//   state() {
+//     return {
+//       react: true,
+//       tester: true
+//     };
+//   }
+// });
 
-// describe('DevFilters', () => {
-//   it('renders a filters using mock store', () => {
-//     const wrapper = mount(DeveloperFilter, {
-//       mocks: {
-//         $store: {
-//           state: { react: true }
-//         }
+// describe('Developer Filter', () => {
+//   it('renders a filtering component', () => {
+//     const wrapper = shallowMount(DeveloperFilter, {
+//       global: {
+//         plugins: [store]
 //       }
 //     });
-//     expect(wrapper.find('[data-testid="dev__filter-h2"]').text()).to.contain(
+
+//     expect(wrapper.find('[data-testid="dev__filter-h2"]').text()).toBe(
 //       'Find Devs'
 //     );
 //   });
