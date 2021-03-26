@@ -1,16 +1,46 @@
 <template>
   <form @submit.prevent="submitForm">
-    <developer-form-input name="firstName"> </developer-form-input>
-    <developer-form-input name="lastName"> </developer-form-input>
-    <developer-form-input name="description" textarea="true" rows="5">
+    <developer-form-input
+      name="firstName"
+      title="First Name"
+      v-model:value="inputs.firstName.val"
+    >
     </developer-form-input>
-    <developer-form-input name="rate" type="number"> </developer-form-input>
+    <developer-form-input
+      name="lastName"
+      title="Last Name"
+      v-model:value="inputs.lastName.val"
+    >
+      >
+    </developer-form-input>
+    <developer-form-input
+      name="description"
+      title="Description"
+      textarea
+      v-model:value="inputs.description.val"
+    >
+    </developer-form-input>
+    <developer-form-input
+      name="rate"
+      title="Rate"
+      type="number"
+      v-model:value="inputs.rate.val"
+    >
+    </developer-form-input>
 
     <div class="form-control" :class="{ invalid: !isFormValid }">
       <h3>Areas of Expertise</h3>
-      <developer-form-area v-for="area in areas" :key="area" :areas="area">
+      <developer-form-area
+        v-for="area in areas"
+        :key="area"
+        :area="area"
+        v-model:value="inputs.areas.val"
+        @blur="clearValidity('areas')"
+      >
       </developer-form-area>
-      <p v-if="!isFormValid">At least one expertise must be selected.</p>
+      <p v-if="!inputs.areas.isValid">
+        At least one expertise must be selected.
+      </p>
     </div>
     <p v-if="!isFormValid">Please fix the above errors and submit again.</p>
     <base-button>Register</base-button>
@@ -43,7 +73,7 @@ export default {
           isValid: true
         },
         areas: {
-          val: null,
+          val: [],
           isValid: true
         }
       }
@@ -53,6 +83,12 @@ export default {
     isFormValid() {
       console.log(Object.values(this.inputs).every(input => input.isValid));
       return Object.values(this.inputs).every(input => input.isValid);
+    },
+    areas() {
+      let areasArray = this.$store.state.filters.filters;
+      areasArray = Object.keys(areasArray);
+      console.log(areasArray);
+      return areasArray;
     }
   },
   methods: {
@@ -61,7 +97,9 @@ export default {
     },
     validateForm() {
       this.inputs.formIsValid = true;
-      if (this.firstName.val === '') {
+      console.log(this.inputs);
+      /* zrefaktoryzować */
+      if (this.inputs.firstName.val === '') {
         this.inputs.firstName.isValid = false;
         this.formIsValid = false;
       }
@@ -77,24 +115,24 @@ export default {
         this.inputs.rate.isValid = false;
         this.formIsValid = false;
       }
+      console.log(this.inputs.areas.val);
       if (this.inputs.areas.val.length === 0) {
         this.inputs.areas.isValid = false;
         this.formIsValid = false;
       }
     },
     submitForm() {
-      this.validateForm();
+      // this.validateForm();
 
-      if (!this.formIsValid) {
-        return;
-      }
-
+      // if (!this.formIsValid) {
+      //   return;
+      // }
       const formData = {
-        first: this.firstName.val,
-        last: this.lastName.val,
-        desc: this.description.val,
-        rate: this.rate.val,
-        areas: this.areas.val
+        first: this.inputs.firstName.val,
+        last: this.inputs.lastName.val,
+        desc: this.inputs.description.val,
+        rate: this.inputs.rate.val,
+        areas: [this.inputs.areas.val]
       };
       console.log(formData);
 
@@ -104,7 +142,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .form-control {
   margin: 0.5rem 0;
 }
@@ -114,7 +152,9 @@ label {
   display: block;
   margin-bottom: 0.5rem;
 }
-
+label:first-letter {
+  text-transform: capitalize;
+}
 input[type='checkbox'] + label {
   font-weight: normal;
   display: inline;

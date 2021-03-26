@@ -1,28 +1,35 @@
 <template>
-  <div class="form-control" :class="{ invalid: !firstName.isValid }">
-    <label :for="name">{{ name }}</label>
+  <div class="form-control" :class="{ invalid: false }">
+    <label :for="title">{{ title }}</label>
     <input
       v-if="!textarea"
       :type="type"
       :id="name"
-      v-model.trim="name.val"
+      @input="event => $emit('update:value', event.target.value)"
       @blur="clearValidity(name)"
     />
     <textarea
       v-else
       :id="name"
       :rows="rows"
-      v-model.trim="description.val"
-      @blur="clearValidity('description')"
+      @input="event => $emit('update:value', event.target.value)"
+      @blur="clearValidity(name)"
     ></textarea>
-    <p v-if="!name.isValid">{{ name.capitalize() }} must not be empty.</p>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    value: {
+      type: String
+    },
     name: {
+      type: String,
+      required: true,
+      default: null
+    },
+    title: {
       type: String,
       required: true,
       default: null
