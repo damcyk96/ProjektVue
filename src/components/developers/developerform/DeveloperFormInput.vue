@@ -6,14 +6,12 @@
       :type="type"
       :id="name"
       @input="event => $emit('update:value', event.target.value)"
-      @blur="clearValidity(name)"
     />
     <textarea
       v-else
       :id="name"
       :rows="rows"
       @input="event => $emit('update:value', event.target.value)"
-      @blur="clearValidity(name)"
     ></textarea>
   </div>
 </template>

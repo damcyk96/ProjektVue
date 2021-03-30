@@ -28,16 +28,20 @@
     >
     </developer-form-input>
 
-    <div class="form-control" :class="{ invalid: !isFormValid }">
+    <div class="form-control">
       <h3>Areas of Expertise</h3>
-      <developer-form-area
-        v-for="area in areas"
-        :key="area"
-        :area="area"
-        v-model:value="inputs.areas.val"
-        @blur="clearValidity('areas')"
-      >
-      </developer-form-area>
+      <label class="area-label" :for="area" v-for="area in areas" :key="area">
+        <input
+          type="checkbox"
+          :value="area"
+          :id="area"
+          v-model="inputs.areas.val"
+          @blur="clearValidity('areas')"
+        />
+        {{ area }} Developer
+      </label>
+      <span>Checked areas: {{ inputs.areas.val }}</span>
+
       <p v-if="!inputs.areas.isValid">
         At least one expertise must be selected.
       </p>
@@ -48,10 +52,9 @@
 </template>
 
 <script>
-import DeveloperFormArea from './developerform/DeveloperFormArea.vue';
 import DeveloperFormInput from './developerform/DeveloperFormInput.vue';
 export default {
-  components: { DeveloperFormArea, DeveloperFormInput },
+  components: { DeveloperFormInput },
   emits: ['save-data'],
   data() {
     return {
@@ -132,7 +135,7 @@ export default {
         last: this.inputs.lastName.val,
         desc: this.inputs.description.val,
         rate: this.inputs.rate.val,
-        areas: [this.inputs.areas.val]
+        areas: this.inputs.areas.val
       };
       console.log(formData);
 
@@ -190,7 +193,10 @@ h3 {
   margin: 0.5rem 0;
   font-size: 1rem;
 }
-
+.area-label {
+  text-transform: capitalize;
+  font-weight: 400;
+}
 .invalid label {
   color: red;
 }
