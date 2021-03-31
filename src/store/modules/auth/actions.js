@@ -38,7 +38,7 @@ export default {
       throw error;
     }
     const superUserId = '2eHJRG6onNONxiTc7aUsPbViJd82';
-    let isSuperUser = false;
+    let isSuperUser;
     if (responseData.localId == superUserId) {
       isSuperUser = true;
     } else {
@@ -51,7 +51,8 @@ export default {
     context.commit('setUser', {
       token: responseData.idToken,
       userId: responseData.localId,
-      tokenExpiration: responseData.expiresIn
+      tokenExpiration: responseData.expiresIn,
+      isSuperUser: isSuperUser
     });
   },
   tryLogin(context) {
