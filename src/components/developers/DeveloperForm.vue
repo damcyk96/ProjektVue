@@ -1,12 +1,14 @@
 <template>
   <form @submit.prevent="submitForm">
     <developer-form-input
+      :class="{ invalid: !inputs.firstName.isValid }"
       name="firstName"
       title="First Name"
       v-model:value="inputs.firstName.val"
     >
     </developer-form-input>
     <developer-form-input
+      :class="{ invalid: !inputs.lastName.isValid }"
       name="lastName"
       title="Last Name"
       v-model:value="inputs.lastName.val"
@@ -14,6 +16,7 @@
       >
     </developer-form-input>
     <developer-form-input
+      :class="{ invalid: !inputs.description.isValid }"
       name="description"
       title="Description"
       textarea
@@ -21,6 +24,7 @@
     >
     </developer-form-input>
     <developer-form-input
+      :class="{ invalid: !inputs.rate.isValid }"
       name="rate"
       title="Rate"
       type="number"
@@ -28,7 +32,7 @@
     >
     </developer-form-input>
 
-    <div class="form-control">
+    <div class="form-control" :class="{ invalid: !inputs.areas.isValid }">
       <h3>Areas of Expertise</h3>
       <label class="area-label" :for="area" v-for="area in areas" :key="area">
         <input
@@ -84,13 +88,11 @@ export default {
   },
   computed: {
     isFormValid() {
-      console.log(Object.values(this.inputs).every(input => input.isValid));
       return Object.values(this.inputs).every(input => input.isValid);
     },
     areas() {
       let areasArray = this.$store.state.filters.filters;
       areasArray = Object.keys(areasArray);
-      console.log(areasArray);
       return areasArray;
     }
   },
@@ -99,37 +101,29 @@ export default {
       this.inputs[input].isValid = true;
     },
     validateForm() {
-      this.inputs.formIsValid = true;
-      console.log(this.inputs);
       /* zrefaktoryzować */
       if (this.inputs.firstName.val === '') {
         this.inputs.firstName.isValid = false;
-        this.formIsValid = false;
       }
       if (this.inputs.lastName.val === '') {
         this.inputs.lastName.isValid = false;
-        this.formIsValid = false;
       }
       if (this.inputs.description.val === '') {
         this.inputs.description.isValid = false;
-        this.formIsValid = false;
       }
       if (!this.inputs.rate.val || this.inputs.rate.val < 0) {
         this.inputs.rate.isValid = false;
-        this.formIsValid = false;
       }
-      console.log(this.inputs.areas.val);
       if (this.inputs.areas.val.length === 0) {
         this.inputs.areas.isValid = false;
-        this.formIsValid = false;
       }
     },
     submitForm() {
-      // this.validateForm();
+      this.validateForm();
 
-      // if (!this.formIsValid) {
-      //   return;
-      // }
+      if (!this.isFormValid) {
+        return;
+      }
       const formData = {
         first: this.inputs.firstName.val,
         last: this.inputs.lastName.val,
@@ -137,7 +131,6 @@ export default {
         rate: this.inputs.rate.val,
         areas: this.inputs.areas.val
       };
-      console.log(formData);
 
       this.$emit('save-data', formData);
     }

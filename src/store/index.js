@@ -8,7 +8,7 @@ import filteringModule from './modules/filters/index.js';
 const store = createStore({
   modules: {
     developers: developersModule,
-    feedback: feedbackModule,
+    feedbacks: feedbackModule,
     auth: authModule,
     filters: filteringModule
   }
