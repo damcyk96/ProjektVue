@@ -8,6 +8,7 @@
     </base-dialog>
     <base-card>
       <form @submit.prevent="submitForm">
+        <h1>{{ submitButtonCaption }}</h1>
         <div class="form-control">
           <label for="email">E-Mail</label>
           <input type="email" id="email" v-model.trim="email" />

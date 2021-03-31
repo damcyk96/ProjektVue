@@ -8,13 +8,13 @@
         <li>
           <router-link to="/developers">All Devs</router-link>
         </li>
-        <li v-if="isLoggedIn">
+        <li v-if="isSuperUser">
           <router-link to="/feedbacks">Feedbacks</router-link>
         </li>
-        <li v-else>
+        <li v-if="!isLoggedIn">
           <router-link to="/auth">Login</router-link>
         </li>
-        <li v-if="isLoggedIn">
+        <li v-else>
           <base-button @click="logout">Logout</base-button>
         </li>
       </ul>
@@ -27,6 +27,10 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
+    },
+    isSuperUser() {
+      console.log(this.$store.getters.isSuperUser);
+      return this.$store.getters.isSuperUser;
     }
   },
   methods: {

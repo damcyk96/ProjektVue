@@ -1,20 +1,18 @@
 <template>
   <li>
     <div>
-      <a :href="emailLink">{{ email }}</a>
+      <h2>{{ supervisor }}</h2>
+      <h3>For project: {{ project }}</h3>
+      <h4>From: {{ from }} to: {{ to }}</h4>
     </div>
+    <hr />
     <p>{{ message }}</p>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['email', 'message'],
-  computed: {
-    emailLink() {
-      return 'mailto:' + this.email;
-    }
-  }
+  props: ['supervisor', 'project', 'from', 'to', 'message']
 };
 </script>
 

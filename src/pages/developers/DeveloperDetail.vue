@@ -31,17 +31,22 @@
         <p>{{ description }}</p>
       </base-card>
     </section>
+    <section>
+      <base-card>
+        <FeedbacksReceived />
+      </base-card>
+    </section>
   </div>
 </template>
 
 <script>
+import FeedbacksReceived from '../feedbacks/FeedbacksReceived';
+
 export default {
-  props: ['id'],
-  data() {
-    return {
-      selectedDeveloper: null
-    };
+  components: {
+    FeedbacksReceived
   },
+  props: ['id'],
   computed: {
     fullName() {
       return (
@@ -59,12 +64,12 @@ export default {
     },
     feedbackLink() {
       return this.$route.path + '/' + this.id + '/feedback';
+    },
+    selectedDeveloper() {
+      return this.$store.getters['developers/developers'].find(
+        developer => developer.id === this.id
+      );
     }
-  },
-  created() {
-    this.selectedDeveloper = this.$store.getters['developers/developers'].find(
-      developer => developer.id === this.id
-    );
   }
 };
 </script>

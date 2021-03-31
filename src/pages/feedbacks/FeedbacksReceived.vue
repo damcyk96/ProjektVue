@@ -10,18 +10,21 @@
     <section>
       <base-card>
         <header>
-          <h2>Feedback Received</h2>
+          <h2>Feedbacks Received</h2>
         </header>
         <base-spinner v-if="isLoading"></base-spinner>
         <ul v-else-if="hasFeedbacks && !isLoading">
           <feedback-item
             v-for="req in receivedFeedbacks"
             :key="req.id"
-            :email="req.userEmail"
+            :supervisor="req.supervisor"
+            :project="req.project"
+            :from="req.from"
+            :to="req.to"
             :message="req.message"
           ></feedback-item>
         </ul>
-        <h3 v-else>You haven't received any feedbacks yet!</h3>
+        <h3 v-else>Haven't received any feedbacks yet!</h3>
       </base-card>
     </section>
   </div>

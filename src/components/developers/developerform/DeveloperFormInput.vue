@@ -12,6 +12,7 @@
       :id="name"
       :rows="rows"
       @input="event => $emit('update:value', event.target.value)"
+      @blur="$emit('blur')"
     ></textarea>
   </div>
 </template>

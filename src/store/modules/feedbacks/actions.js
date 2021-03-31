@@ -1,7 +1,10 @@
 export default {
   async feedbackDeveloper(context, payload) {
     const newFeedback = {
-      userEmail: payload.email,
+      supervisor: payload.supervisor,
+      project: payload.project,
+      from: payload.from,
+      to: payload.to,
       message: payload.message
     };
     const response = await fetch(
@@ -47,7 +50,10 @@ export default {
       const feedback = {
         id: key,
         developerId: developerId,
-        userEmail: responseData[key].userEmail,
+        supervisor: responseData[key].supervisor,
+        project: responseData[key].project,
+        from: responseData[key].from,
+        to: responseData[key].to,
         message: responseData[key].message
       };
       feedbacks.push(feedback);

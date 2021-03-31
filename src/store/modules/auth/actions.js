@@ -37,7 +37,14 @@ export default {
       );
       throw error;
     }
-
+    const superUserId = '2eHJRG6onNONxiTc7aUsPbViJd82';
+    let isSuperUser = false;
+    if (responseData.localId == superUserId) {
+      isSuperUser = true;
+    } else {
+      isSuperUser = false;
+    }
+    localStorage.setItem('isSuperUser', isSuperUser);
     localStorage.setItem('token', responseData.idToken);
     localStorage.setItem('userId', responseData.localId);
 
@@ -50,12 +57,14 @@ export default {
   tryLogin(context) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
+    const isSuperUser = localStorage.getItem('isSuperUser');
 
     if (token && userId) {
       context.commit('setUser', {
         token: token,
         userId: userId,
-        tokenExpiration: null
+        tokenExpiration: null,
+        isSuperUser: isSuperUser
       });
     }
   },

@@ -1,8 +1,20 @@
 <template>
   <form @submit.prevent="submitForm">
     <div class="form-control">
-      <label for="email">Your E-Mail</label>
-      <input type="email" id="email" v-model.trim="email" />
+      <label for="supervisor">Supervisor name</label>
+      <input type="text" id="supervisor" v-model.trim="supervisor" />
+    </div>
+    <div class="form-control">
+      <label for="project">Project name</label>
+      <input type="text" id="project" v-model.trim="project" />
+    </div>
+    <div class="form-control">
+      <label for="from">From</label>
+      <input type="date" id="project" v-model.trim="from" />
+    </div>
+    <div class="form-control">
+      <label for="to">To</label>
+      <input type="date" id="project" v-model.trim="to" />
     </div>
     <div class="form-control">
       <label for="message">Message</label>
@@ -21,7 +33,10 @@
 export default {
   data() {
     return {
-      email: '',
+      supervisor: '',
+      project: '',
+      from: '',
+      to: '',
       message: '',
       formIsValid: true
     };
@@ -30,15 +45,19 @@ export default {
     submitForm() {
       this.formIsValid = true;
       if (
-        this.email === '' ||
-        !this.email.includes('@') ||
-        this.message === ''
+        this.supervisor === '' ||
+        this.message === '' ||
+        this.from === '' ||
+        this.to === ''
       ) {
         this.formIsValid = false;
         return;
       }
       this.$store.dispatch('feedbacks/feedbackDeveloper', {
-        email: this.email,
+        supervisor: this.supervisor,
+        project: this.project,
+        from: this.from,
+        to: this.to,
         message: this.message,
         developerId: this.$route.params.id
       });
