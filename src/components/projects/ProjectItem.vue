@@ -3,6 +3,7 @@
     <div>
       <h3>For project: {{ project }}</h3>
       <h4>From: {{ from }} to: {{ to }}</h4>
+      <h4>{{ position }}</h4>
     </div>
     <hr />
   </li>
@@ -10,7 +11,7 @@
 
 <script>
 export default {
-  props: ['project', 'from', 'to']
+  props: ['project', 'from', 'to', 'position']
 };
 </script>
 

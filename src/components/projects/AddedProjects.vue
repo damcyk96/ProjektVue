@@ -20,6 +20,7 @@
             :project="req.project"
             :from="req.from"
             :to="req.to"
+            :position="req.position"
           ></project-item>
         </ul>
         <h3 v-else>Haven't added any project to your profile yet!</h3>
@@ -45,7 +46,7 @@ export default {
     receivedProjects() {
       return this.$store.getters['projects/projects'];
     },
-    hasFeedbacks() {
+    hasProjects() {
       return this.$store.getters['projects/hasProjects'];
     }
   },

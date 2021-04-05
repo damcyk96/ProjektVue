@@ -13,6 +13,10 @@
         <label for="to">To</label>
         <input type="date" id="to" v-model.trim="to" />
       </div>
+      <div class="form-control">
+        <label for="position">Position</label>
+        <input type="text" id="position" v-model.trim="position" />
+      </div>
       <p class="errors" v-if="!formIsValid">
         Please check again your form.
       </p>
@@ -30,13 +34,19 @@ export default {
       project: '',
       from: '',
       to: '',
+      position: '',
       formIsValid: true
     };
   },
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (this.project === '' || this.from === '' || this.to === '') {
+      if (
+        this.project === '' ||
+        this.from === '' ||
+        this.to === '' ||
+        this.position === ''
+      ) {
         this.formIsValid = false;
         return;
       }
@@ -44,6 +54,7 @@ export default {
         project: this.project,
         from: this.from,
         to: this.to,
+        position: this.position,
         developerId: this.$route.params.id
       });
       this.$router.replace('/developers');

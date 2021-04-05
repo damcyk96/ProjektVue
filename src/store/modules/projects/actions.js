@@ -1,12 +1,14 @@
 export default {
   async projectForDeveloper(context, payload) {
+    const developerId = context.rootGetters.userId;
     const newProject = {
       project: payload.project,
       from: payload.from,
-      to: payload.to
+      to: payload.to,
+      position: payload.position
     };
     const response = await fetch(
-      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${payload.developerId}.json`,
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${developerId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newProject)
@@ -30,14 +32,16 @@ export default {
   },
   async fetchProjects(context) {
     const developerId = context.rootGetters.userId;
+    //rozwiązać problem przekazywanego identyfikatora, na ten moment projekty są od użytkownika, ktory jest zalogowany, a nie w którego się kliknie
     const response = await fetch(
-      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/mSwhhWKD9XbJdYKagYqtMdzfsh62.json`
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${developerId}.json`
     );
     const responseData = await response.json();
+    console.log(responseData);
 
     if (!response.ok) {
       const error = new Error(
-        responseData.message || 'Failed to fetch feedbacks.'
+        responseData.message || 'Failed to fetch projects.'
       );
       throw error;
     }
@@ -50,7 +54,8 @@ export default {
         developerId: developerId,
         project: responseData[key].project,
         from: responseData[key].from,
-        to: responseData[key].to
+        to: responseData[key].to,
+        position: responseData[key].position
       };
       projects.push(project);
     }
