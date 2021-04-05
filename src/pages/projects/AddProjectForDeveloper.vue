@@ -1,44 +1,49 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div class="form-control">
-      <label for="supervisor">Supervisor name</label>
-      <input type="text" id="supervisor" v-model.trim="supervisor" />
-    </div>
-    <div class="form-control">
-      <label for="message">Message</label>
-      <textarea rows="5" id="message" v-model.trim="message"></textarea>
-    </div>
-    <p class="errors" v-if="!formIsValid">
-      Please enter a valid email and non-empty message.
-    </p>
-    <div class="actions">
-      <base-button>Add Feedback</base-button>
-    </div>
-  </form>
+  <base-card>
+    <form @submit.prevent="submitForm">
+      <div class="form-control">
+        <label for="name">Project name</label>
+        <input type="text" id="project" v-model.trim="project" />
+      </div>
+      <div class="form-control">
+        <label for="from">From</label>
+        <input type="date" id="from" v-model.trim="from" />
+      </div>
+      <div class="form-control">
+        <label for="to">To</label>
+        <input type="date" id="to" v-model.trim="to" />
+      </div>
+      <p class="errors" v-if="!formIsValid">
+        Please check again your form.
+      </p>
+      <div class="actions">
+        <base-button>Add project to your profile</base-button>
+      </div>
+    </form>
+  </base-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      supervisor: '',
       project: '',
       from: '',
       to: '',
-      message: '',
       formIsValid: true
     };
   },
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (this.supervisor === '' || this.message === '') {
+      if (this.project === '' || this.from === '' || this.to === '') {
         this.formIsValid = false;
         return;
       }
-      this.$store.dispatch('feedbacks/feedbackDeveloper', {
-        supervisor: this.supervisor,
-        message: this.message,
+      this.$store.dispatch('projects/projectForDeveloper', {
+        project: this.project,
+        from: this.from,
+        to: this.to,
         developerId: this.$route.params.id
       });
       this.$router.replace('/developers');

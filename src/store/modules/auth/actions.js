@@ -38,6 +38,7 @@ export default {
       throw error;
     }
     const superUserId = '2eHJRG6onNONxiTc7aUsPbViJd82';
+
     let isSuperUser;
     if (responseData.localId == superUserId) {
       isSuperUser = true;

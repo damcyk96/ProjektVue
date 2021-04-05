@@ -1,16 +1,16 @@
 <template>
   <li>
     <div>
-      <h2>{{ supervisor }}</h2>
+      <h3>For project: {{ project }}</h3>
+      <h4>From: {{ from }} to: {{ to }}</h4>
     </div>
     <hr />
-    <p>{{ message }}</p>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['supervisor', 'message']
+  props: ['project', 'from', 'to']
 };
 </script>
 

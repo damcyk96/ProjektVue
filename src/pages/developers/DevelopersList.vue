@@ -34,6 +34,7 @@
             :last-name="developer.lastName"
             :rate="developer.hourlyRate"
             :areas="developer.areas"
+            :privilege="developer.privilege"
           ></developer-item>
         </ul>
         <h3 v-if="filteredDevelopers.length == 0 && !isloading">

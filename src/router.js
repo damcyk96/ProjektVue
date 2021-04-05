@@ -4,7 +4,7 @@ import DeveloperDetail from './pages/developers/DeveloperDetail.vue';
 import DevelopersList from './pages/developers/DevelopersList.vue';
 import DeveloperRegistration from './pages/developers/DeveloperRegistration.vue';
 import FeedbackDeveloper from './pages/feedbacks/FeedbackDeveloper.vue';
-import FeedbacksReceived from './pages/feedbacks/FeedbacksReceived.vue';
+import AddProjectForDeveloper from './pages/projects/AddProjectForDeveloper.vue';
 import NotFound from './pages/NotFound.vue';
 import UserAuth from './pages/auth/UserAuth.vue';
 import store from './store/index';
@@ -29,8 +29,8 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/feedbacks',
-      component: FeedbacksReceived,
+      path: '/projects',
+      component: AddProjectForDeveloper,
       meta: { requiresAuth: true }
     },
     { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },

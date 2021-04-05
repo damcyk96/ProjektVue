@@ -50,6 +50,29 @@
         At least one expertise must be selected.
       </p>
     </div>
+    <div class="form-control" :class="{ invalid: !inputs.privilege.isValid }">
+      <h3>Privilege</h3>
+      <input
+        type="radio"
+        id="dev"
+        value="developer"
+        v-model="inputs.privilege.val"
+      />
+      <label for="dev">Developer</label>
+      <br />
+      <input
+        type="radio"
+        id="superDev"
+        value="superDev"
+        v-model="inputs.privilege.val"
+      />
+      <label for="superDev">Developer with feedbacks options</label>
+      <br />
+      <span>Picked: {{ inputs.privilege.val }}</span>
+      <p v-if="!inputs.privilege.isValid">
+        Choose your privilege.
+      </p>
+    </div>
     <p v-if="!isFormValid">Please fix the above errors and submit again.</p>
     <base-button>Register</base-button>
   </form>
@@ -81,6 +104,10 @@ export default {
         },
         areas: {
           val: [],
+          isValid: true
+        },
+        privilege: {
+          val: '',
           isValid: true
         }
       }
@@ -129,7 +156,8 @@ export default {
         last: this.inputs.lastName.val,
         desc: this.inputs.description.val,
         rate: this.inputs.rate.val,
-        areas: this.inputs.areas.val
+        areas: this.inputs.areas.val,
+        privilege: this.inputs.privilege.val
       };
 
       this.$emit('save-data', formData);

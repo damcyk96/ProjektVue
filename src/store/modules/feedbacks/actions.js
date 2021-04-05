@@ -2,9 +2,6 @@ export default {
   async feedbackDeveloper(context, payload) {
     const newFeedback = {
       supervisor: payload.supervisor,
-      project: payload.project,
-      from: payload.from,
-      to: payload.to,
       message: payload.message
     };
     const response = await fetch(
@@ -31,9 +28,8 @@ export default {
   },
   async fetchFeedbacks(context) {
     const developerId = context.rootGetters.userId;
-    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://vue-http-demo-85e9e.firebaseio.com/feedbacks/${developerId}.json?auth=${token}`
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/feedbacks/mSwhhWKD9XbJdYKagYqtMdzfsh62.json`
     );
     const responseData = await response.json();
 
@@ -51,9 +47,6 @@ export default {
         id: key,
         developerId: developerId,
         supervisor: responseData[key].supervisor,
-        project: responseData[key].project,
-        from: responseData[key].from,
-        to: responseData[key].to,
         message: responseData[key].message
       };
       feedbacks.push(feedback);

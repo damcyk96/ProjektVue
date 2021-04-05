@@ -1,6 +1,7 @@
 <template>
   <li>
     <h3>{{ fullName }}</h3>
+    <h4>{{ privilege }}</h4>
     <h4>{{ rate }} per hour</h4>
     <div>
       <base-badge
@@ -12,6 +13,7 @@
     </div>
     <div class="actions">
       <base-button
+        v-if="isSuperUser"
         mode="outline"
         :to="{ name: 'feedbackDev', params: { id: id } }"
         >Feedback</base-button
@@ -25,10 +27,13 @@
 
 <script>
 export default {
-  props: ['id', 'firstName', 'lastName', 'rate', 'areas'],
+  props: ['id', 'firstName', 'lastName', 'rate', 'areas', 'privilege'],
   computed: {
     fullName() {
       return this.firstName + ' ' + this.lastName;
+    },
+    isSuperUser() {
+      return this.$store.getters.isSuperUser;
     }
   }
 };

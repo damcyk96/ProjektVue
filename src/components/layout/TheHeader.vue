@@ -8,8 +8,8 @@
         <li>
           <router-link to="/developers">All Devs</router-link>
         </li>
-        <li v-if="isSuperUser">
-          <router-link to="/feedbacks">Feedbacks</router-link>
+        <li v-if="isLoggedIn">
+          <router-link to="/projects">Add project</router-link>
         </li>
         <li v-if="!isLoggedIn">
           <router-link to="/auth">Login</router-link>
@@ -29,9 +29,9 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
     isSuperUser() {
-      console.log(this.$store.getters.isSuperUser);
       return this.$store.getters.isSuperUser;
     }
+    //rozkminić czy dodawanie projektu jak sie juz jest dev czy nie ma znaczenia - problem z getterem
   },
   methods: {
     logout() {

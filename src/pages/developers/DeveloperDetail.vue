@@ -6,7 +6,7 @@
         <h3>{{ rate }} per hour</h3>
       </base-card>
     </section>
-    <section>
+    <section v-if="isSuperUser">
       <base-card>
         <header>
           <h2>Add feedback for {{ fullName }}</h2>
@@ -33,18 +33,19 @@
     </section>
     <section>
       <base-card>
-        <FeedbacksReceived />
+        <AddedProjects />
       </base-card>
     </section>
   </div>
 </template>
 
 <script>
-import FeedbacksReceived from '../feedbacks/FeedbacksReceived';
+//import FeedbacksReceived from '../feedbacks/FeedbacksReceived';
+import AddedProjects from '../../components/projects/AddedProjects';
 
 export default {
   components: {
-    FeedbacksReceived
+    AddedProjects
   },
   props: ['id'],
   computed: {
@@ -69,6 +70,9 @@ export default {
       return this.$store.getters['developers/developers'].find(
         developer => developer.id === this.id
       );
+    },
+    isSuperUser() {
+      return this.$store.getters.isSuperUser;
     }
   }
 };
