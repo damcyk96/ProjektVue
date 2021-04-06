@@ -47,7 +47,6 @@ export default {
     }
 
     const developers = [];
-    //obiekt na tablice, tylko zostaje id na key
     for (const key in responseData) {
       const developer = {
         id: key,
@@ -60,7 +59,6 @@ export default {
       };
       developers.push(developer);
     }
-
     context.commit('setDevelopers', developers);
     context.commit('setFetchTimestamp');
   }

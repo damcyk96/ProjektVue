@@ -1,7 +1,7 @@
 <template>
   <li>
     <div>
-      <h3>For project: {{ project }}</h3>
+      <h3>Project name: {{ project }}</h3>
       <h4>From: {{ from }} to: {{ to }}</h4>
       <h4>{{ position }}</h4>
     </div>

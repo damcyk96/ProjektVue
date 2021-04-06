@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!isLoading">
     <section>
       <base-card>
         <h2>{{ fullName }}</h2>
@@ -48,6 +48,11 @@ export default {
     AddedProjects
   },
   props: ['id'],
+  data() {
+    return {
+      isLoading: false
+    };
+  },
   computed: {
     fullName() {
       return (
@@ -73,6 +78,22 @@ export default {
     },
     isSuperUser() {
       return this.$store.getters.isSuperUser;
+    }
+  },
+  created() {
+    this.loadDevelopers();
+  },
+  methods: {
+    async loadDevelopers(refresh = false) {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('developers/loadDevelopers', {
+          forceRefresh: refresh
+        });
+      } catch (error) {
+        this.error = error.message || 'Something went wrong!';
+      }
+      this.isLoading = false;
     }
   }
 };

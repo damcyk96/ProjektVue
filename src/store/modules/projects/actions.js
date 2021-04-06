@@ -14,9 +14,7 @@ export default {
         body: JSON.stringify(newProject)
       }
     );
-    console.log(response);
     const responseData = await response.json();
-    console.log(responseData);
 
     if (!response.ok) {
       const error = new Error(
@@ -37,7 +35,6 @@ export default {
       `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${developerId}.json`
     );
     const responseData = await response.json();
-    console.log(responseData);
 
     if (!response.ok) {
       const error = new Error(
