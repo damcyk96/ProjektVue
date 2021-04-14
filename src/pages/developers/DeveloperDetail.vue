@@ -6,13 +6,19 @@
         <h3>{{ rate }} per hour</h3>
       </base-card>
     </section>
-    <section v-if="isFeedbackDev">
+    <section>
       <base-card>
-        <header>
-          <h2>Add feedback for {{ fullName }}</h2>
-          <base-button link :to="feedbackLink">Feedbacks</base-button>
-        </header>
-        <router-view></router-view>
+        <div v-if="isFeedbackDev && receivedProjects > 0">
+          <header>
+            <h2>Add feedback for {{ fullName }}</h2>
+            <base-button link :to="feedbackLink">Feedbacks</base-button>
+          </header>
+          <router-view></router-view>
+        </div>
+        <h4 v-else>
+          You can't add any feedback. Developer
+          {{ fullName }} hasn't add any project yet.
+        </h4>
       </base-card>
     </section>
     <section>
@@ -77,6 +83,9 @@ export default {
     },
     isFeedbackDev() {
       return this.$store.getters['developers/isFeedbackDev'];
+    },
+    receivedProjects() {
+      return this.$store.getters['projects/projects'].length;
     }
   },
   created() {
