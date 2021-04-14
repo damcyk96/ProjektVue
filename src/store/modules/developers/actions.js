@@ -35,7 +35,6 @@ export default {
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
       return;
     }
-
     const response = await fetch(
       `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/developers.json`
     );

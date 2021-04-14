@@ -36,6 +36,7 @@ export default {
   components: {
     ProjectItem
   },
+  props: ['id'],
   data() {
     return {
       isLoading: false,
@@ -51,13 +52,13 @@ export default {
     }
   },
   created() {
-    this.loadProjects();
+    this.loadProjects(this.id);
   },
   methods: {
-    async loadProjects() {
+    async loadProjects(id) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('projects/fetchProjects');
+        await this.$store.dispatch('projects/fetchProjects', id);
       } catch (error) {
         this.error = error.message || 'Something failed!';
       }

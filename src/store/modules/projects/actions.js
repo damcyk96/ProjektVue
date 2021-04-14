@@ -28,14 +28,11 @@ export default {
 
     context.commit('addProject', newProject);
   },
-  async fetchProjects(context) {
-    const developerId = context.rootGetters.userId;
-    //rozwiązać problem przekazywanego identyfikatora, na ten moment projekty są od użytkownika, ktory jest zalogowany, a nie w którego się kliknie
+  async fetchProjects(context, id) {
     const response = await fetch(
-      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${developerId}.json`
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${id}.json`
     );
     const responseData = await response.json();
-
     if (!response.ok) {
       const error = new Error(
         responseData.message || 'Failed to fetch projects.'
@@ -48,7 +45,6 @@ export default {
     for (const key in responseData) {
       const project = {
         id: key,
-        developerId: developerId,
         project: responseData[key].project,
         from: responseData[key].from,
         to: responseData[key].to,

@@ -37,36 +37,29 @@ export default {
       );
       throw error;
     }
-    const superUserId = '2eHJRG6onNONxiTc7aUsPbViJd82';
 
-    let isSuperUser;
-    if (responseData.localId == superUserId) {
-      isSuperUser = true;
-    } else {
-      isSuperUser = false;
-    }
-    localStorage.setItem('isSuperUser', isSuperUser);
     localStorage.setItem('token', responseData.idToken);
     localStorage.setItem('userId', responseData.localId);
+    localStorage.setItem('tokenExpiration', responseData.expiresIn);
 
     context.commit('setUser', {
       token: responseData.idToken,
       userId: responseData.localId,
-      tokenExpiration: responseData.expiresIn,
-      isSuperUser: isSuperUser
+      tokenExpiration: responseData.expiresIn
     });
   },
   tryLogin(context) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
-    const isSuperUser = localStorage.getItem('isSuperUser');
+    const expiresIn = localStorage.getItem('expiresIn');
+    const feedbackDev = localStorage.getItem('feedbackDev');
 
     if (token && userId) {
       context.commit('setUser', {
         token: token,
         userId: userId,
-        tokenExpiration: null,
-        isSuperUser: isSuperUser
+        tokenExpiration: expiresIn,
+        isFeedbackDev: feedbackDev
       });
     }
   },
@@ -74,7 +67,8 @@ export default {
     context.commit('setUser', {
       token: null,
       userId: null,
-      tokenExpiration: null
+      tokenExpiration: null,
+      isFeedbackDev: null
     });
   }
 };

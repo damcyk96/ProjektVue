@@ -6,7 +6,7 @@
         <h3>{{ rate }} per hour</h3>
       </base-card>
     </section>
-    <section v-if="isSuperUser">
+    <section v-if="isFeedbackDev">
       <base-card>
         <header>
           <h2>Add feedback for {{ fullName }}</h2>
@@ -33,7 +33,7 @@
     </section>
     <section>
       <base-card>
-        <AddedProjects />
+        <AddedProjects :id="id" />
       </base-card>
     </section>
   </div>
@@ -76,8 +76,8 @@ export default {
         developer => developer.id === this.id
       );
     },
-    isSuperUser() {
-      return this.$store.getters.isSuperUser;
+    isFeedbackDev() {
+      return this.$store.getters['developers/isFeedbackDev'];
     }
   },
   created() {

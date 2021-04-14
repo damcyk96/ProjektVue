@@ -67,6 +67,9 @@ export default {
     isDeveloper() {
       return this.$store.getters['developers/isDeveloper'];
     },
+    isFeedbackDev() {
+      return this.$store.getters['developers/isFeedbackDev'];
+    },
     filteredDevelopers() {
       const developers = this.$store.getters['developers/developers'];
       const newFilters = this.activeFilters.filters;

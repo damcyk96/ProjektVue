@@ -13,12 +13,14 @@
     </div>
     <div class="actions">
       <base-button
-        v-if="isSuperUser"
+        v-if="isFeedbackDev"
         mode="outline"
         :to="{ name: 'feedbackDev', params: { id: id } }"
         >Feedback</base-button
       >
-      <base-button :to="{ name: 'developer', params: { id: id } }"
+      <base-button
+        v-if="isLoggedIn"
+        :to="{ name: 'developer', params: { id: id } }"
         >View Details</base-button
       >
     </div>
@@ -32,8 +34,11 @@ export default {
     fullName() {
       return this.firstName + ' ' + this.lastName;
     },
-    isSuperUser() {
-      return this.$store.getters.isSuperUser;
+    isFeedbackDev() {
+      return this.$store.getters['developers/isFeedbackDev'];
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
     }
   }
 };

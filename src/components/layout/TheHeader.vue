@@ -27,11 +27,7 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
-    },
-    isSuperUser() {
-      return this.$store.getters.isSuperUser;
     }
-    //rozkminić czy dodawanie projektu jak sie juz jest dev czy nie ma znaczenia - problem z getterem
   },
   methods: {
     logout() {
