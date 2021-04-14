@@ -10,6 +10,14 @@ export default {
     const userId = rootGetters.userId;
     return developers.some(developer => developer.id === userId);
   },
+  fullNameDeveloper(_, getters, _2, rootGetters) {
+    const developers = getters.developers;
+    const userId = rootGetters.userId;
+    const selectedDeveloper = developers.filter(
+      developer => developer.id === userId
+    );
+    return selectedDeveloper[0].firstName + ' ' + selectedDeveloper[0].lastName;
+  },
   isFeedbackDev(_, getters, _2, rootGetters) {
     const developers = getters.developers;
     const userId = rootGetters.userId;

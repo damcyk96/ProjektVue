@@ -1,8 +1,15 @@
 <template>
   <form @submit.prevent="submitForm">
     <div class="form-control">
-      <label for="supervisor">Supervisor name</label>
-      <input type="text" id="supervisor" v-model.trim="supervisor" />
+      <label>Choose project:</label>
+      <select v-model.trim="project">
+        <option
+          v-for="project in receivedProjects"
+          :key="project.id"
+          :value="project.id"
+          >{{ project.project }}</option
+        >
+      </select>
     </div>
     <div class="form-control">
       <label for="message">Message</label>
@@ -21,23 +28,32 @@
 export default {
   data() {
     return {
-      supervisor: '',
+      isLoading: false,
       project: '',
-      from: '',
-      to: '',
+      supervisor: '',
       message: '',
       formIsValid: true
     };
   },
+  props: ['id'],
+  computed: {
+    receivedProjects() {
+      return this.$store.getters['projects/projects'];
+    },
+    fullNameSuperVisor() {
+      return this.$store.getters['developers/fullNameDeveloper'];
+    }
+  },
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (this.supervisor === '' || this.message === '') {
+      if (this.project === '' || this.message === '') {
         this.formIsValid = false;
         return;
       }
       this.$store.dispatch('feedbacks/feedbackDeveloper', {
-        supervisor: this.supervisor,
+        project: this.project,
+        supervisor: this.fullNameSuperVisor,
         message: this.message,
         developerId: this.$route.params.id
       });

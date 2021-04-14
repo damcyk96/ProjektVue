@@ -37,7 +37,6 @@ export default {
       );
       throw error;
     }
-
     localStorage.setItem('token', responseData.idToken);
     localStorage.setItem('userId', responseData.localId);
     localStorage.setItem('tokenExpiration', responseData.expiresIn);

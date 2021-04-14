@@ -33,15 +33,14 @@
     </section>
     <section>
       <base-card>
-        <AddedProjects :id="id" />
+        <added-projects :id="id"> </added-projects>
       </base-card>
     </section>
   </div>
 </template>
 
 <script>
-//import FeedbacksReceived from '../feedbacks/FeedbacksReceived';
-import AddedProjects from '../../components/projects/AddedProjects';
+import AddedProjects from '../../components/projects/AddedProjects.vue';
 
 export default {
   components: {
@@ -69,7 +68,7 @@ export default {
       return this.selectedDeveloper.description;
     },
     feedbackLink() {
-      return this.$route.path + '/' + this.id + '/feedback';
+      return this.$route.path + '/feedback';
     },
     selectedDeveloper() {
       return this.$store.getters['developers/developers'].find(

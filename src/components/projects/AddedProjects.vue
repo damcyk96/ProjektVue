@@ -10,7 +10,7 @@
     <section>
       <base-card>
         <header>
-          <h2>Added projects to your profile</h2>
+          <h2>Added projects to profile</h2>
         </header>
         <base-spinner v-if="isLoading"></base-spinner>
         <ul v-else-if="hasProjects && !isLoading">
@@ -23,7 +23,7 @@
             :position="req.position"
           ></project-item>
         </ul>
-        <h3 v-else>Haven't added any project to your profile yet!</h3>
+        <h3 v-else>Haven't added any project to profile yet!</h3>
       </base-card>
     </section>
   </div>

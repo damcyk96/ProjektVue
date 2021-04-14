@@ -2,10 +2,11 @@ export default {
   async feedbackDeveloper(context, payload) {
     const newFeedback = {
       supervisor: payload.supervisor,
-      message: payload.message
+      message: payload.message,
+      project: payload.project
     };
     const response = await fetch(
-      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/feedbacks/${payload.developerId}.json`,
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${payload.developerId}/${payload.project}/feedbacks.json`,
       {
         method: 'POST',
         body: JSON.stringify(newFeedback)
