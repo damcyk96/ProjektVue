@@ -46,7 +46,6 @@ export default {
   },
   computed: {
     receivedProjects() {
-      console.log(this.$store.getters['projects/projects'].feedbacks);
       return this.$store.getters['projects/projects'];
     },
     hasProjects() {

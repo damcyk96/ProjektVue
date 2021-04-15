@@ -55,7 +55,8 @@ export default {
         project: this.project,
         supervisor: this.fullNameSuperVisor,
         message: this.message,
-        developerId: this.$route.params.id
+        developerId: this.$route.params.id,
+        date: new Date().toLocaleString()
       });
       this.$router.replace('/developers');
     }

@@ -7,12 +7,13 @@
         </header>
         <div v-if="feedbacks">
           <ul>
-            <li>
-              <div v-for="feedback in feedbacks" :key="feedback.id">
-                <h2>{{ feedback.supervisor }}</h2>
-                <p>{{ feedback.message }}</p>
-              </div>
-            </li>
+            <div v-for="feedback in feedbacks" :key="feedback.id">
+              <li>
+                <h2>Supervisor: {{ feedback.supervisor }}</h2>
+                <p>Content: {{ feedback.message }}</p>
+                <p>Date: {{ feedback.date }}</p>
+              </li>
+            </div>
           </ul>
         </div>
         <h3 v-else>Haven't received any feedbacks yet!</h3>
