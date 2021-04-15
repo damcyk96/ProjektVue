@@ -58,6 +58,14 @@ button:active {
   border-color: #1d6ead;
   color: #1d6ead;
 }
+.delete {
+  background-color: red;
+  color: white;
+}
+.delete:hover {
+  background-color: white;
+  color: red;
+}
 
 .flat:hover,
 .flat:active,

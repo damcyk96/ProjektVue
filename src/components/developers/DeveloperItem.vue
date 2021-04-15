@@ -12,6 +12,9 @@
       ></base-badge>
     </div>
     <div class="actions">
+      <base-button v-if="isFeedbackDev" mode="delete" @click="deleteAccount">
+        Delete account</base-button
+      >
       <base-button
         v-if="isFeedbackDev"
         mode="outline"
@@ -40,7 +43,14 @@ export default {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
     }
-  }
+  },
+  emits: ['delete']
+  // methods: {
+  //   deleteAccount(id) {
+  //     console.log(this.id);
+  //     this.$emit('delete', this.id);
+  //   }
+  // }
 };
 </script>
 

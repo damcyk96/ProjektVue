@@ -48,7 +48,8 @@ export default {
         project: responseData[key].project,
         from: responseData[key].from,
         to: responseData[key].to,
-        position: responseData[key].position
+        position: responseData[key].position,
+        feedbacks: responseData[key].feedbacks
       };
       projects.push(project);
     }

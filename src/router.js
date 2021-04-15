@@ -3,7 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import DeveloperDetail from './pages/developers/DeveloperDetail.vue';
 import DevelopersList from './pages/developers/DevelopersList.vue';
 import DeveloperRegistration from './pages/developers/DeveloperRegistration.vue';
-import FeedbackDeveloper from './pages/feedbacks/FeedbackDeveloper.vue';
+import DeveloperEditing from './pages/developers/DeveloperEditing.vue';
+import FeedbackDeveloper from './components/feedbacks/FeedbackDeveloper.vue';
 import AddProjectForDeveloper from './pages/projects/AddProjectForDeveloper.vue';
 import NotFound from './pages/NotFound.vue';
 import UserAuth from './pages/auth/UserAuth.vue';
@@ -26,6 +27,11 @@ const router = createRouter({
     {
       path: '/register',
       component: DeveloperRegistration,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/edit',
+      component: DeveloperEditing,
       meta: { requiresAuth: true }
     },
     {

@@ -11,6 +11,9 @@
         <li v-if="isLoggedIn">
           <router-link to="/projects">Add project</router-link>
         </li>
+        <li v-if="isDeveloper">
+          <router-link to="/edit">Edit your data</router-link>
+        </li>
         <li v-if="!isLoggedIn">
           <router-link to="/auth">Login</router-link>
         </li>
@@ -27,6 +30,9 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
+    },
+    isDeveloper() {
+      return this.$store.getters['developers/isDeveloper'];
     }
   },
   methods: {

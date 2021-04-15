@@ -15,15 +15,16 @@
         <base-spinner v-if="isLoading"></base-spinner>
         <ul v-else-if="hasProjects && !isLoading">
           <project-item
-            v-for="req in receivedProjects"
-            :key="req.id"
-            :project="req.project"
-            :from="req.from"
-            :to="req.to"
-            :position="req.position"
+            v-for="project in receivedProjects"
+            :key="project.id"
+            :project="project.project"
+            :from="project.from"
+            :to="project.to"
+            :position="project.position"
+            :feedbacks="project.feedbacks"
           ></project-item>
         </ul>
-        <h3 v-else>Haven't added any project to profile yet!</h3>
+        <h3 v-else>Hasn't added any project to profile yet!</h3>
       </base-card>
     </section>
   </div>
@@ -45,6 +46,7 @@ export default {
   },
   computed: {
     receivedProjects() {
+      console.log(this.$store.getters['projects/projects'].feedbacks);
       return this.$store.getters['projects/projects'];
     },
     hasProjects() {

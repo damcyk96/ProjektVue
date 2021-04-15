@@ -27,10 +27,9 @@ export default {
 
     context.commit('addFeedback', newFeedback);
   },
-  async fetchFeedbacks(context) {
-    const developerId = context.rootGetters.userId;
+  async fetchFeedbacksPerProject(context, id) {
     const response = await fetch(
-      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/feedbacks/mSwhhWKD9XbJdYKagYqtMdzfsh62.json`
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${id}/feedbacks.json`
     );
     const responseData = await response.json();
 
@@ -46,7 +45,6 @@ export default {
     for (const key in responseData) {
       const feedback = {
         id: key,
-        developerId: developerId,
         supervisor: responseData[key].supervisor,
         message: responseData[key].message
       };

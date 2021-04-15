@@ -6,12 +6,23 @@
       <h4>{{ position }}</h4>
     </div>
     <hr />
+    <div v-if="isFeedbackDev">
+      <div v-for="feedback in feedbacks" :key="feedback.id">
+        <h3>{{ feedback.supervisor }}</h3>
+        <p>{{ feedback.message }}</p>
+      </div>
+    </div>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['project', 'from', 'to', 'position']
+  props: ['project', 'from', 'to', 'position', 'feedbacks'],
+  computed: {
+    isFeedbackDev() {
+      return this.$store.getters['developers/isFeedbackDev'];
+    }
+  }
 };
 </script>
 

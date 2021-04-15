@@ -1,21 +1,6 @@
 <template>
   <form @submit.prevent="submitForm">
     <developer-form-input
-      :class="{ invalid: !inputs.firstName.isValid }"
-      name="firstName"
-      title="First Name"
-      v-model:value="inputs.firstName.val"
-    >
-    </developer-form-input>
-    <developer-form-input
-      :class="{ invalid: !inputs.lastName.isValid }"
-      name="lastName"
-      title="Last Name"
-      v-model:value="inputs.lastName.val"
-    >
-      >
-    </developer-form-input>
-    <developer-form-input
       :class="{ invalid: !inputs.description.isValid }"
       name="description"
       title="Description"
@@ -49,31 +34,9 @@
         At least one expertise must be selected.
       </p>
     </div>
-    <div class="form-control" :class="{ invalid: !inputs.privilege.isValid }">
-      <h3>Privilege</h3>
-      <input
-        type="radio"
-        id="dev"
-        value="developer"
-        v-model="inputs.privilege.val"
-      />
-      <label for="dev">Developer</label>
-      <br />
-      <input
-        type="radio"
-        id="superDev"
-        value="superDev"
-        v-model="inputs.privilege.val"
-      />
-      <label for="superDev">Developer with feedbacks options</label>
-      <br />
-      <span>Picked: {{ inputs.privilege.val }}</span>
-      <p v-if="!inputs.privilege.isValid">
-        Choose your privilege.
-      </p>
-    </div>
+
     <p v-if="!isFormValid">Please fix the above errors and submit again.</p>
-    <base-button>Register</base-button>
+    <base-button>Update</base-button>
   </form>
 </template>
 
@@ -81,18 +44,10 @@
 import DeveloperFormInput from './developerform/DeveloperFormInput.vue';
 export default {
   components: { DeveloperFormInput },
-  emits: ['save-data'],
+  emits: ['update-data'],
   data() {
     return {
       inputs: {
-        firstName: {
-          val: '',
-          isValid: true
-        },
-        lastName: {
-          val: '',
-          isValid: true
-        },
         description: {
           val: '',
           isValid: true
@@ -103,10 +58,6 @@ export default {
         },
         areas: {
           val: [],
-          isValid: true
-        },
-        privilege: {
-          val: '',
           isValid: true
         }
       }
@@ -127,13 +78,6 @@ export default {
       this.inputs[input].isValid = true;
     },
     validateForm() {
-      /* zrefaktoryzować */
-      if (this.inputs.firstName.val === '') {
-        this.inputs.firstName.isValid = false;
-      }
-      if (this.inputs.lastName.val === '') {
-        this.inputs.lastName.isValid = false;
-      }
       if (this.inputs.description.val === '') {
         this.inputs.description.isValid = false;
       }
@@ -151,15 +95,11 @@ export default {
         return;
       }
       const formData = {
-        first: this.inputs.firstName.val,
-        last: this.inputs.lastName.val,
         desc: this.inputs.description.val,
         rate: this.inputs.rate.val,
-        areas: this.inputs.areas.val,
-        privilege: this.inputs.privilege.val
+        areas: this.inputs.areas.val
       };
-
-      this.$emit('save-data', formData);
+      this.$emit('update-data', formData);
     }
   }
 };

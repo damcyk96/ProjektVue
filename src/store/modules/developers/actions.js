@@ -31,6 +31,38 @@ export default {
       id: userId
     });
   },
+  async updateDeveloper(context, data) {
+    const userId = context.rootGetters.userId;
+    const developerData = {
+      description: data.desc,
+      hourlyRate: data.rate,
+      areas: data.areas
+    };
+    const response = await fetch(
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/developers/${userId}.json`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify(developerData)
+      }
+    );
+    //TO DO - PRZEMYŚLEĆ, JAK TO ODŚWIEŻYĆ MĄDRZE
+    if (!response.ok) {
+      // error ...
+    }
+  },
+  async deleteDeveloper(id) {
+    const response = await fetch(
+      `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/developers/${id}.json`,
+      {
+        method: 'DELETE',
+        body: JSON.stringify(id)
+      }
+    );
+    //TO DO - PRZEMYŚLEĆ, JAK TO ODŚWIEŻYĆ MĄDRZE
+    if (!response.ok) {
+      // error ...
+    }
+  },
   async loadDevelopers(context, payload) {
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
       return;
