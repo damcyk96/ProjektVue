@@ -5,15 +5,17 @@
         <header>
           <h2>Feedbacks Received</h2>
         </header>
-        <ul>
-          <li>
-            <div v-for="feedback in feedbacks" :key="feedback.id">
-              <h2>{{ feedback.supervisor }}</h2>
-              <p>{{ feedback.message }}</p>
-            </div>
-          </li>
-        </ul>
-        <h3>Haven't received any feedbacks yet!</h3>
+        <div v-if="feedbacks">
+          <ul>
+            <li>
+              <div v-for="feedback in feedbacks" :key="feedback.id">
+                <h2>{{ feedback.supervisor }}</h2>
+                <p>{{ feedback.message }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h3 v-else>Haven't received any feedbacks yet!</h3>
       </base-card>
     </section>
   </div>

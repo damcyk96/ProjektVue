@@ -6,17 +6,16 @@
       <h4>{{ position }}</h4>
     </div>
     <hr />
-    <div v-if="isFeedbackDev">
-      <div v-for="feedback in feedbacks" :key="feedback.id">
-        <h3>{{ feedback.supervisor }}</h3>
-        <p>{{ feedback.message }}</p>
-      </div>
-    </div>
+    <FeedbacksReceived :feedbacks="feedbacks" v-if="isFeedbackDev" />
   </li>
 </template>
 
 <script>
+import FeedbacksReceived from '../feedbacks/FeedbacksReceived';
 export default {
+  components: {
+    FeedbacksReceived
+  },
   props: ['project', 'from', 'to', 'position', 'feedbacks'],
   computed: {
     isFeedbackDev() {
