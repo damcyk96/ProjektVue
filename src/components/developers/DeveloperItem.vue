@@ -12,9 +12,6 @@
       ></base-badge>
     </div>
     <div class="actions">
-      <base-button v-if="isFeedbackDev" mode="delete" @click="deleteAccount">
-        Delete account</base-button
-      >
       <base-button
         v-if="isFeedbackDev"
         mode="outline"

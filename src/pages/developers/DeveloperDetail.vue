@@ -6,19 +6,18 @@
         <h3>{{ rate }} per hour</h3>
       </base-card>
     </section>
-    <section>
+    <section v-if="isFeedbackDev">
       <base-card>
-        <div v-if="isFeedbackDev && receivedProjects > 0">
+        <div>
           <header>
-            <h2>Add feedback for {{ fullName }}</h2>
-            <base-button link :to="feedbackLink">Feedbacks</base-button>
+            <h2>Action for {{ fullName }}</h2>
+            <base-button link :to="feedbackLink" v-if="receivedProjects > 0"
+              >Add feedback</base-button
+            >
+            <base-button link :to="deleteLink">Delete account</base-button>
           </header>
           <router-view></router-view>
         </div>
-        <h4 v-else>
-          You can't add any feedback. Developer
-          {{ fullName }} hasn't add any project yet.
-        </h4>
       </base-card>
     </section>
     <section>
@@ -75,6 +74,9 @@ export default {
     },
     feedbackLink() {
       return this.$route.path + '/feedback';
+    },
+    deleteLink() {
+      return this.$route.path + '/delete';
     },
     selectedDeveloper() {
       return this.$store.getters['developers/developers'].find(

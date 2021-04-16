@@ -4,6 +4,25 @@
       <!-- podwójna konwersja by był bool na 100% -->
       <p>{{ error }}</p>
     </base-dialog>
+
+    <section v-if="isDeveloper">
+      <base-card>
+        <h2 class="center">Your account</h2>
+        <div>
+          <ul>
+            <developer-item
+              :key="loggedDeveloper[0].id"
+              :id="loggedDeveloper[0].id"
+              :first-name="loggedDeveloper[0].firstName"
+              :last-name="loggedDeveloper[0].lastName"
+              :rate="loggedDeveloper[0].hourlyRate"
+              :areas="loggedDeveloper[0].areas"
+              :privilege="loggedDeveloper[0].privilege"
+            ></developer-item>
+          </ul>
+        </div>
+      </base-card>
+    </section>
     <section>
       <developer-filter @change-filter="setFilters"></developer-filter>
     </section>
@@ -48,11 +67,13 @@
 <script>
 import DeveloperItem from '../../components/developers/DeveloperItem';
 import DeveloperFilter from '../../components/developers/DeveloperFilter';
+import BaseCard from '../../components/ui/BaseCard.vue';
 
 export default {
   components: {
     DeveloperItem,
-    DeveloperFilter
+    DeveloperFilter,
+    BaseCard
   },
   data() {
     return {
@@ -69,6 +90,9 @@ export default {
     },
     isFeedbackDev() {
       return this.$store.getters['developers/isFeedbackDev'];
+    },
+    loggedDeveloper() {
+      return this.$store.getters['developers/loggedDeveloper'];
     },
     filteredDevelopers() {
       const developers = this.$store.getters['developers/developers'];
@@ -121,5 +145,9 @@ ul {
 .controls {
   display: flex;
   justify-content: space-between;
+}
+
+.center {
+  text-align: center;
 }
 </style>

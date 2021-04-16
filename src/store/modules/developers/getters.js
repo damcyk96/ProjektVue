@@ -10,6 +10,11 @@ export default {
     const userId = rootGetters.userId;
     return developers.some(developer => developer.id === userId);
   },
+  loggedDeveloper(_, getters, _2, rootGetters) {
+    const developers = getters.developers;
+    const userId = rootGetters.userId;
+    return developers.filter(developer => developer.id === userId);
+  },
   fullNameDeveloper(_, getters, _2, rootGetters) {
     const developers = getters.developers;
     const userId = rootGetters.userId;

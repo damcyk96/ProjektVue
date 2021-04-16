@@ -4,6 +4,7 @@ import DeveloperDetail from './pages/developers/DeveloperDetail.vue';
 import DevelopersList from './pages/developers/DevelopersList.vue';
 import DeveloperRegistration from './pages/developers/DeveloperRegistration.vue';
 import DeveloperEditing from './pages/developers/DeveloperEditing.vue';
+import DeveloperDelete from './pages/developers/DeveloperDelete.vue';
 import FeedbackDeveloper from './components/feedbacks/FeedbackDeveloper.vue';
 import AddProjectForDeveloper from './pages/projects/AddProjectForDeveloper.vue';
 import NotFound from './pages/NotFound.vue';
@@ -21,7 +22,8 @@ const router = createRouter({
       name: 'developer',
       props: true,
       children: [
-        { path: 'feedback', name: 'feedbackDev', component: FeedbackDeveloper } // /developers/c1/feedback
+        { path: 'feedback', name: 'feedbackDev', component: FeedbackDeveloper }, // /developers/c1/feedback
+        { path: 'delete', name: 'deleteDev', component: DeveloperDelete }
       ]
     },
     {
