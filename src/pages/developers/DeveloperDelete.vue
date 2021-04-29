@@ -11,15 +11,13 @@
 import DeveloperFormDelete from '../../components/developers/DeveloperFormDelete';
 
 export default {
+  props: ['id'],
   components: {
     DeveloperFormDelete
   },
-
   methods: {
     deleteData() {
-      this.$store.dispatch('developers/deleteDeveloper', {
-        id: this.$route.params.id
-      });
+      this.$store.dispatch('developers/deleteDeveloper', this.$route.params.id);
       this.$router.replace('/developers');
     }
   }

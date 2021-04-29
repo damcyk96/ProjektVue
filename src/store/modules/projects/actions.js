@@ -5,6 +5,8 @@ export default {
       project: payload.project,
       from: payload.from,
       to: payload.to,
+      supervisor: payload.supervisor,
+      technologies: payload.technologies,
       position: payload.position
     };
     const response = await fetch(
@@ -49,6 +51,8 @@ export default {
         from: responseData[key].from,
         to: responseData[key].to,
         position: responseData[key].position,
+        supervisor: responseData[key].supervisor,
+        technologies: responseData[key].technologies,
         feedbacks: responseData[key].feedbacks
       };
       projects.push(project);

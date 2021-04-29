@@ -2,8 +2,17 @@
   <li>
     <div>
       <h2>Project name: {{ project }}</h2>
+      <h3>Supervisor: {{ supervisor }}</h3>
       <h4>From: {{ from }} to: {{ to }}</h4>
       <h4>{{ position }}</h4>
+      <div>
+        <base-badge
+          v-for="technology in technologies"
+          :key="technology"
+          :type="technology"
+          :title="technology"
+        ></base-badge>
+      </div>
     </div>
     <hr />
     <FeedbacksReceived :feedbacks="feedbacks" v-if="isFeedbackDev" />
@@ -16,7 +25,15 @@ export default {
   components: {
     FeedbacksReceived
   },
-  props: ['project', 'from', 'to', 'position', 'feedbacks'],
+  props: [
+    'project',
+    'from',
+    'to',
+    'position',
+    'supervisor',
+    'technologies',
+    'feedbacks'
+  ],
   computed: {
     isFeedbackDev() {
       return this.$store.getters['developers/isFeedbackDev'];

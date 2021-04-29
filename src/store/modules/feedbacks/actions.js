@@ -28,4 +28,17 @@ export default {
 
     context.commit('addFeedback', newFeedback);
   }
+  // async deleteDeveloper(id) {
+  //   const response = await fetch(
+  //     `https://vueprojekt-b49c1-default-rtdb.europe-west1.firebasedatabase.app/projects/${payload.developerId}/${payload.project}/feedbacks/${payload.feedbackId}.json`,
+  //     {
+  //       method: 'DELETE',
+  //       body: JSON.stringify(id)
+  //     }
+  //   );
+  //   //TO DO - PRZEMYŚLEĆ, JAK TO ODŚWIEŻYĆ MĄDRZE
+  //   if (!response.ok) {
+  //     // error ...
+  //   }
+  // }
 };

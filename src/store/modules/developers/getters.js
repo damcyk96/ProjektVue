@@ -23,6 +23,14 @@ export default {
     );
     return selectedDeveloper[0].firstName + ' ' + selectedDeveloper[0].lastName;
   },
+  superDevelopers(_, getters) {
+    const developers = getters.developers;
+    const superDevelopers = developers.filter(
+      developer => developer.privilege == 'superDev'
+    );
+
+    return superDevelopers;
+  },
   isFeedbackDev(_, getters, _2, rootGetters) {
     const developers = getters.developers;
     const userId = rootGetters.userId;

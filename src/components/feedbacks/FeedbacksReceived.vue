@@ -12,6 +12,9 @@
                 <h2>Supervisor: {{ feedback.supervisor }}</h2>
                 <p>Content: {{ feedback.message }}</p>
                 <p>Date: {{ feedback.date }}</p>
+                <base-button class="deleteFeedback"
+                  >Delete this feedback</base-button
+                >
               </li>
             </div>
           </ul>
@@ -24,7 +27,13 @@
 
 <script>
 export default {
-  props: ['feedbacks']
+  props: ['feedbacks'],
+  methods: {
+    deleteData() {
+      this.$store.dispatch('developers/deleteDeveloper');
+      this.$router.replace('/developers');
+    }
+  }
 };
 </script>
 

@@ -7,7 +7,9 @@
           v-for="project in receivedProjects"
           :key="project.id"
           :value="project.id"
-          >{{ project.project }}</option
+          >{{
+            'In project:' + project.project + ' as ' + project.position
+          }}</option
         >
       </select>
     </div>

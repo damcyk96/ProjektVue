@@ -18,7 +18,6 @@ export default {
   methods: {
     updateData(data) {
       this.$store.dispatch('developers/updateDeveloper', data);
-      this.$router.replace('/developers');
     }
   }
 };

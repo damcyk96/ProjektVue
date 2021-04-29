@@ -21,6 +21,8 @@
             :from="project.from"
             :to="project.to"
             :position="project.position"
+            :supervisor="project.supervisor"
+            :technologies="project.technologies"
             :feedbacks="project.feedbacks"
           ></project-item>
         </ul>

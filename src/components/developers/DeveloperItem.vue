@@ -42,12 +42,6 @@ export default {
     }
   },
   emits: ['delete']
-  // methods: {
-  //   deleteAccount(id) {
-  //     console.log(this.id);
-  //     this.$emit('delete', this.id);
-  //   }
-  // }
 };
 </script>
 
